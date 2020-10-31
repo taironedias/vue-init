@@ -6,28 +6,25 @@
 </head>
 <body>
     <div id="app">
-        <p v-on:click="onClick('p', $event)">
-            Curso de Vue.js Completo
-            <button v-on:click="onClick('button', $event)">Clique com propagação do evento</button>
-            <button v-on:click.stop="onClick('button', $event)">Clique sem propagação do evento</button>
-        </p>
-
-        <form>
-            <input type="text">
-            <button type="submit" v-on:click="onSubmit">Enviar sem modificador</button>
-            <button type="submit" v-on:click.prevent="onSubmit">Enviar com modificador</button>
-        </form>
+        <input v-on:keyup="onKey" placeholder="Qualquer tecla">
+        <br><br>
+        <input v-on:keyup.enter="onKey" placeholder="Teclar Enter">
+        <br><br>
+        <input v-on:keyup.enter.esc="onKey" placeholder="Teclar Enter ou Escape">
+        <br><br>
+        <input v-on:keyup.arrow-up="onKey" placeholder="Teclar ArrowUp (arrow-up)">
+        <br><br>
+        <input v-on:keyup.ctrl.enter="onKey" placeholder="Teclar CTRL + Enter (mas se pressionar CTRL + Shift + Enter ele funciona)">
+        <br><br>
+        <input v-on:keyup.ctrl.enter.exact="onKey" placeholder="Teclar CTRL + Enter (exact)">
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
             methods: {
-                onClick: function(element, event) {
-                    console.log(event.type, ':', element);
-                },
-                onSubmit: function(event) {
-                    console.log('Formulário enviado!');
+                onKey: function(event) {
+                    console.log(`Tecla "${event.key}" pressionada`);
                 }
             }
         });
