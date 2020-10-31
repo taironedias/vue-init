@@ -6,19 +6,19 @@
 </head>
 <body>
     <div id="app">
-        <input v-on:blur="exibirNome('Meu nome é: ', $event)">
-        <p>{{ nome }}</p>
+        <p v-on:click="onClick('p', $event)">
+            Curso de Vue.js Completo
+            <button v-on:click="onClick('button', $event)">Clique com propagação do evento</button>
+            <button v-on:click.stop="onClick('button', $event)">Clique sem propagação do evento</button>
+        </p>
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
-            data: {
-                nome: ''
-            },
             methods: {
-                exibirNome: function(texto, event) {
-                    this.nome = texto + event.target.value;
+                onClick: function(element, event) {
+                    console.log(event.type, ':', element);
                 }
             }
         });
