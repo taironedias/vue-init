@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vue.js - Guia Completo</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <p>Curso: {{ curso }} | {{ aluno() }}</p>
+    </div>
+
+    <script type="text/javascript">
+
+        new Vue({
+            el: '#app',
+            data: {
+                curso: 'Vue.js'
+            },
+            methods: {
+                aluno: function() {
+                    return 'Tairone Dias';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
