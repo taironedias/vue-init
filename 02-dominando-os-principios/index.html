@@ -6,7 +6,7 @@
 </head>
 <body>
     <div id="app">
-        <p>Curso: {{ curso }} | {{ aluno() }}</p>
+        <p>Curso: {{ curso }} | {{ nomeAluno() }}</p>
     </div>
 
     <script type="text/javascript">
@@ -14,11 +14,12 @@
         new Vue({
             el: '#app',
             data: {
-                curso: 'Vue.js'
+                curso: 'Vue.js',
+                nome: 'Tairone C Dias'
             },
             methods: {
-                aluno: function() {
-                    return 'Tairone Dias';
+                nomeAluno: function() {
+                    return this.nome;
                 }
             }
         });
