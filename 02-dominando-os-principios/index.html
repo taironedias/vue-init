@@ -8,6 +8,7 @@
     <div id="app">
         <p>Curso: {{ curso }} | {{ nomeAluno() }}</p>
         <a v-bind:href="docs_link">Docs</a>
+        <p>Instrutor: <span v-text="instrutor"></span></p>
     </div>
 
     <script type="text/javascript">
@@ -17,7 +18,8 @@
             data: {
                 curso: 'Vue.js',
                 nome: 'Tairone C Dias',
-                docs_link: 'https://vuejs.org/v2/guide/'
+                docs_link: 'https://vuejs.org/v2/guide/',
+                instrutor: 'Plínio Naves'
             },
             methods: {
                 nomeAluno: function() {
