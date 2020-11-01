@@ -15,18 +15,30 @@
         .green {
             background-color: darkgreen;
         }
+        .coral {
+            background-color: lightcoral;
+        }
+        .blue {
+            background-color: lightblue;
+        }
+        .circle {
+            border-radius: 100%;
+        }
     </style>
 </head>
 <body>
     <div id="app">
         <div class="box" :class="{ 'green': changeColor } " @click="changeColor = !changeColor"></div>
+        <div class="box" :class="nameClass"></div>
+        <input v-model="nameClass">
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
             data: {
-                changeColor: false
+                changeColor: false,
+                nameClass: ''
             }
         });
     </script>
