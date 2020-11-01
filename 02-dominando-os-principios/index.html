@@ -6,12 +6,8 @@
 </head>
 <body>
     <div id="app">
-        <p>Nome Original: {{ curso }}</p>
-        <p>Nome Invertido (computed): {{ cursoInvertidoComputed }}</p>
-        <p>Nome Invertido (method): {{ cursoInvertidoMethod() }}</p>
-        <p>Nome do autor: {{ nomeCompleto ? 'Plínio Naves' : 'Plínio' }}</p>
-        <button @click="nomeCompleto = !nomeCompleto">Alterna Nome</button>
-        <input @keyup.enter="alterarNomeCurso">
+        <p>Nome: {{ nomeCompleto }}</p>
+        <button @click="alterarNome">Alterna Nome</button>
 
         <!-- Ao chamar um método qualquer, o método 'cursoInvertidoMethod' é executado novamente, enquanto que o computedProperties só é executado na primeira vez e seu valor é cacheado, sendo alterado, se a propriedade dependente ('curso'), é alterada. Então, recomenda-se trabalhar sempre com computedProperties para esse contexto de manipular valores que possam ser síncronos -->
 
@@ -21,23 +17,28 @@
         new Vue({
             el: '#app',
             data: {
-                curso: 'Curso de Vue.js',
-                nomeCompleto: false
+                primeiroNome: 'Tairone',
+                ultimoNome: 'Dias',
+                // nomeCompleto: 'Tairone Dias'
             },
+            /* Utilizando watch fica um pouco verboso e meio que repetitivo, então aconselha-se utilizar os computedProperties também */
+            // watch: {
+            //     primeiroNome: function(newValue, oldValue) {
+            //         this.nomeCompleto = `${newValue} ${this.ultimoNome}`;
+            //     },
+            //     ultimoNome: function(newValue, oldValue) {
+            //         this.nomeCompleto = `${this.primeiroNome} ${newValue}`;
+            //     }
+            // },
             computed: {
-                cursoInvertidoComputed: function() {
-                    /* método da computedProperties deve sempre retornar dados que possam ser síncronos, caso exista alguma requisição externa não deve-se utilizar essa propriedade do Vue.js */
-                    console.log('Computed!');
-                    return this.curso.split('').reverse().join('');
+                nomeCompleto: function() {
+                    return `${this.primeiroNome} ${this.ultimoNome}`;
                 }
             },
             methods: {
-                alterarNomeCurso: function(event) {
-                    this.curso = event.target.value;
-                },
-                cursoInvertidoMethod: function() {
-                    console.log('Method!');
-                    return this.curso.split('').reverse().join('');
+                alterarNome: function(event) {
+                    this.primeiroNome = 'Dias';
+                    this.ultimoNome = 'Tairone';
                 }
             }
         });
