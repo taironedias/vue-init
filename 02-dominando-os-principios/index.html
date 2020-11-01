@@ -6,28 +6,26 @@
 </head>
 <body>
     <div id="app">
-        <a v-bind:href="docs" target="_blank" rel="noopener noreferrer">Vue.js</a>
-        <br><br>
-        <button v-on:click="onClick">Clique</button>
-
-        <hr>
-
-        <!-- Atalho para v-bind é : -->
-        <a :href="docs" target="_blank" rel="noopener noreferrer">Vue.js</a>
-        <br><br>
-        <!-- Atalho para v-on é @ -->
-        <button @click="onClick">Clique</button>
+        <p>{{ curso }} => {{ curso.split('').reverse().join('') }}</p>
+        <p>{{ curso }} => {{ cursoInvertido }}</p>
+        <input @keyup.enter="alterarNomeCurso">
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
             data: {
-                docs: 'https://vuejs.org'
+                curso: 'Curso de Vue.js'
+            },
+            computed: {
+                cursoInvertido: function() {
+                    /* método da computedProperties deve sempre retornar dados que possam ser síncronos, caso exista alguma requisição externa não deve-se utilizar essa propriedade do Vue.js */
+                    return this.curso.split('').reverse().join('');
+                }
             },
             methods: {
-                onClick: function(event) {
-                    console.log(`Evento: "${event.type}"`);
+                alterarNomeCurso: function(event) {
+                    this.curso = event.target.value;
                 }
             }
         });
