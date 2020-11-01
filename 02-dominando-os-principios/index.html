@@ -6,33 +6,18 @@
 </head>
 <body>
     <div id="app">
-        <p>Nome: {{ nomeCompleto }}</p>
-        <input @keyup.enter="alterarNome">
+        <!-- Essa é a primeira forma, que é um pouco mais verbosa e trabalhosa -->
+        <input :value="nome" @input="nome = $event.target.value">
+        <!-- Essa é a segunda forma, simples e rápida -->
+        <input v-model="nome">
+        <p>Nome: {{ nome }}</p>
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
             data: {
-                primeiroNome: 'Tairone',
-                ultimoNome: 'Dias'
-            },
-            computed: {
-                nomeCompleto: {
-                    get: function() {
-                        return `${this.primeiroNome} ${this.ultimoNome}`;
-                    },
-                    set: function(value) {
-                        let nomes = value.split(' ');
-                        this.primeiroNome = nomes[0];
-                        this.ultimoNome = nomes[nomes.length - 1];
-                    }
-                }
-            },
-            methods: {
-                alterarNome: function(event) {
-                    this.nomeCompleto = event.target.value;
-                }
+                nome: 'Tairone'
             }
         });
     </script>
