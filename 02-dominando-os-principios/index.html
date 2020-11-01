@@ -24,6 +24,9 @@
         .circle {
             border-radius: 100%;
         }
+        .half-circle {
+            border-radius: 30%;
+        }
     </style>
 </head>
 <body>
@@ -31,6 +34,7 @@
         <div class="box" :class="{ 'green': changeColor } " @click="changeColorBox"></div>
         <div class="box" :class="nameClass"></div>
         <div class="box" :class="classCSS" @click="changeColorBox"></div>
+        <div class="box" :class="arrayClassCSS" @click="changeColorBox"></div>
         <input v-model="nameClass">
     </div>
 
@@ -48,6 +52,13 @@
                         circle: this.changeColor,
                         blue: !this.changeColor
                     }
+                },
+                arrayClassCSS: function() {
+                    return [
+                        'half-circle',
+                        this.nameClass,
+                        { green: this.changeColor }
+                    ]
                 }
             },
             methods: {
