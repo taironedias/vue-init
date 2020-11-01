@@ -7,31 +7,31 @@
 <body>
     <div id="app">
         <p>Nome: {{ nomeCompleto }}</p>
-        <button @click="alterarNome">Alterna Nome</button>
-
-        <!-- Ao chamar um método qualquer, o método 'cursoInvertidoMethod' é executado novamente, enquanto que o computedProperties só é executado na primeira vez e seu valor é cacheado, sendo alterado, se a propriedade dependente ('curso'), é alterada. Então, recomenda-se trabalhar sempre com computedProperties para esse contexto de manipular valores que possam ser síncronos -->
-
+        <input @keyup.enter="alterarNome">
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
             data: {
-                nomeCompleto: 'Tairone Dias'
+                primeiroNome: 'Tairone',
+                ultimoNome: 'Dias'
             },
-            /* Deve-se utilizar o watch para processos assíncronos ou quando precisar realizar alguma operação que não retorne nenhum valor, sendo que o  computedProperties necessita de um retorno */
-            watch: {
-                nomeCompleto: function(newValue, oldValue) {
-                    let self = this;
-                    /* Como existe uma Closure no setTimeout, o this refere-se ao seu próprio escopo. Logo, é necessário recuperar o escopo do Vue, cria-se a variável para recuperar a referência do Vue e assim utilizá-la dentro do Closure */
-                    setTimeout(() => {
-                        self.nomeCompleto = '';
-                    }, 3000);
+            computed: {
+                nomeCompleto: {
+                    get: function() {
+                        return `${this.primeiroNome} ${this.ultimoNome}`;
+                    },
+                    set: function(value) {
+                        let nomes = value.split(' ');
+                        this.primeiroNome = nomes[0];
+                        this.ultimoNome = nomes[nomes.length - 1];
+                    }
                 }
             },
             methods: {
                 alterarNome: function(event) {
-                    this.nomeCompleto = 'Dias Tairone';
+                    this.nomeCompleto = event.target.value;
                 }
             }
         });
