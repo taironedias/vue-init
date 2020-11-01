@@ -6,21 +6,28 @@
 </head>
 <body>
     <div id="app">
-        <button v-on:click="onClick">Botão esquerdo</button>
+        <a v-bind:href="docs" target="_blank" rel="noopener noreferrer">Vue.js</a>
         <br><br>
-        <button v-on:click.middle="onClick">Botão do meio</button>
+        <button v-on:click="onClick">Clique</button>
+
+        <hr>
+
+        <!-- Atalho para v-bind é : -->
+        <a :href="docs" target="_blank" rel="noopener noreferrer">Vue.js</a>
         <br><br>
-        <button v-on:click.right="onClick">Botão direito</button>
-        <br><br>
-        <button v-on:click.right.prevent="onClick">Botão direito (sem menu de contexto)</button>
+        <!-- Atalho para v-on é @ -->
+        <button @click="onClick">Clique</button>
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
+            data: {
+                docs: 'https://vuejs.org'
+            },
             methods: {
                 onClick: function(event) {
-                    console.log(`Botão "${event.button}" pressionado`);
+                    console.log(`Evento: "${event.type}"`);
                 }
             }
         });
