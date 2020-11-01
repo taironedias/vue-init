@@ -17,28 +17,21 @@
         new Vue({
             el: '#app',
             data: {
-                primeiroNome: 'Tairone',
-                ultimoNome: 'Dias',
-                // nomeCompleto: 'Tairone Dias'
+                nomeCompleto: 'Tairone Dias'
             },
-            /* Utilizando watch fica um pouco verboso e meio que repetitivo, então aconselha-se utilizar os computedProperties também */
-            // watch: {
-            //     primeiroNome: function(newValue, oldValue) {
-            //         this.nomeCompleto = `${newValue} ${this.ultimoNome}`;
-            //     },
-            //     ultimoNome: function(newValue, oldValue) {
-            //         this.nomeCompleto = `${this.primeiroNome} ${newValue}`;
-            //     }
-            // },
-            computed: {
-                nomeCompleto: function() {
-                    return `${this.primeiroNome} ${this.ultimoNome}`;
+            /* Deve-se utilizar o watch para processos assíncronos ou quando precisar realizar alguma operação que não retorne nenhum valor, sendo que o  computedProperties necessita de um retorno */
+            watch: {
+                nomeCompleto: function(newValue, oldValue) {
+                    let self = this;
+                    /* Como existe uma Closure no setTimeout, o this refere-se ao seu próprio escopo. Logo, é necessário recuperar o escopo do Vue, cria-se a variável para recuperar a referência do Vue e assim utilizá-la dentro do Closure */
+                    setTimeout(() => {
+                        self.nomeCompleto = '';
+                    }, 3000);
                 }
             },
             methods: {
                 alterarNome: function(event) {
-                    this.primeiroNome = 'Dias';
-                    this.ultimoNome = 'Tairone';
+                    this.nomeCompleto = 'Dias Tairone';
                 }
             }
         });
