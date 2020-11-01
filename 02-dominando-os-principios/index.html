@@ -28,8 +28,9 @@
 </head>
 <body>
     <div id="app">
-        <div class="box" :class="{ 'green': changeColor } " @click="changeColor = !changeColor"></div>
+        <div class="box" :class="{ 'green': changeColor } " @click="changeColorBox"></div>
         <div class="box" :class="nameClass"></div>
+        <div class="box" :class="classCSS" @click="changeColorBox"></div>
         <input v-model="nameClass">
     </div>
 
@@ -39,6 +40,20 @@
             data: {
                 changeColor: false,
                 nameClass: ''
+            },
+            computed: {
+                classCSS: function() {
+                    return {
+                        coral: this.changeColor,
+                        circle: this.changeColor,
+                        blue: !this.changeColor
+                    }
+                }
+            },
+            methods: {
+                changeColorBox: function() {
+                    this.changeColor = !this.changeColor;
+                }
             }
         });
     </script>
