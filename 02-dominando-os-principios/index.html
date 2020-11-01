@@ -3,21 +3,30 @@
 <head>
     <title>Vue.js - Guia Completo</title>
     <script src="https://unpkg.com/vue"></script>
+
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            margin-right: 10px;
+            background-color: gray;
+        }
+        .green {
+            background-color: darkgreen;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        <!-- Essa é a primeira forma, que é um pouco mais verbosa e trabalhosa -->
-        <input :value="nome" @input="nome = $event.target.value">
-        <!-- Essa é a segunda forma, simples e rápida -->
-        <input v-model="nome">
-        <p>Nome: {{ nome }}</p>
+        <div class="box" :class="{ 'green': changeColor } " @click="changeColor = !changeColor"></div>
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
             data: {
-                nome: 'Tairone'
+                changeColor: false
             }
         });
     </script>
