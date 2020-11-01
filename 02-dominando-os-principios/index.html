@@ -5,65 +5,48 @@
     <script src="https://unpkg.com/vue"></script>
 
     <style>
-        .box {
-            width: 200px;
-            height: 200px;
+        #app div {
             display: inline-block;
             margin-right: 10px;
             background-color: gray;
-        }
-        .green {
-            background-color: darkgreen;
-        }
-        .coral {
-            background-color: lightcoral;
-        }
-        .blue {
-            background-color: lightblue;
-        }
-        .circle {
-            border-radius: 100%;
-        }
-        .half-circle {
-            border-radius: 30%;
         }
     </style>
 </head>
 <body>
     <div id="app">
-        <div class="box" :class="{ 'green': changeColor } " @click="changeColorBox"></div>
-        <div class="box" :class="nameClass"></div>
-        <div class="box" :class="classCSS" @click="changeColorBox"></div>
-        <div class="box" :class="arrayClassCSS" @click="changeColorBox"></div>
-        <input v-model="nameClass">
+        <!-- Posso utilizar tanto a sintaxe kebab-case (background-color) quando cammelCase (backgroundColor) -->
+        <div style="width: 200px; height: 200px;" :style="{ backgroundColor: color, height: length + 'px' }"></div>
+        <div :style="styleCSS"></div>
+        <div :style="arrayStyleCSS"></div>
+        <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flexbox'] }"></div>
+
+        <input v-model="color" placeholder="Cor">
+        <input v-model="length" placeholder="Tamanho em px">
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
             data: {
-                changeColor: false,
-                nameClass: ''
+                color: '',
+                length: 200
             },
             computed: {
-                classCSS: function() {
+                styleCSS: function() {
                     return {
-                        coral: this.changeColor,
-                        circle: this.changeColor,
-                        blue: !this.changeColor
+                        backgroundColor: this.color,
+                        height: (parseInt(this.length) + 10) + 'px', /* para não utilizar o parseInt, poderia colocar o modiificar no input 'v-model.number' ou adicionar o sinal + antes da propriedade this.tamanho */
+                        width: '100px'
                     }
                 },
-                arrayClassCSS: function() {
+                arrayStyleCSS: function() {
                     return [
-                        'half-circle',
-                        this.nameClass,
-                        { green: this.changeColor }
+                        this.styleCSS,
+                        {
+                            border: '2px solid black',
+                            borderRadius: '10px'
+                        }
                     ]
-                }
-            },
-            methods: {
-                changeColorBox: function() {
-                    this.changeColor = !this.changeColor;
                 }
             }
         });
