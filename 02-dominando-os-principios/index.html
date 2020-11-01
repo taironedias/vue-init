@@ -6,26 +6,38 @@
 </head>
 <body>
     <div id="app">
-        <p>{{ curso }} => {{ curso.split('').reverse().join('') }}</p>
-        <p>{{ curso }} => {{ cursoInvertido }}</p>
+        <p>Nome Original: {{ curso }}</p>
+        <p>Nome Invertido (computed): {{ cursoInvertidoComputed }}</p>
+        <p>Nome Invertido (method): {{ cursoInvertidoMethod() }}</p>
+        <p>Nome do autor: {{ nomeCompleto ? 'Plínio Naves' : 'Plínio' }}</p>
+        <button @click="nomeCompleto = !nomeCompleto">Alterna Nome</button>
         <input @keyup.enter="alterarNomeCurso">
+
+        <!-- Ao chamar um método qualquer, o método 'cursoInvertidoMethod' é executado novamente, enquanto que o computedProperties só é executado na primeira vez e seu valor é cacheado, sendo alterado, se a propriedade dependente ('curso'), é alterada. Então, recomenda-se trabalhar sempre com computedProperties para esse contexto de manipular valores que possam ser síncronos -->
+
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
             data: {
-                curso: 'Curso de Vue.js'
+                curso: 'Curso de Vue.js',
+                nomeCompleto: false
             },
             computed: {
-                cursoInvertido: function() {
+                cursoInvertidoComputed: function() {
                     /* método da computedProperties deve sempre retornar dados que possam ser síncronos, caso exista alguma requisição externa não deve-se utilizar essa propriedade do Vue.js */
+                    console.log('Computed!');
                     return this.curso.split('').reverse().join('');
                 }
             },
             methods: {
                 alterarNomeCurso: function(event) {
                     this.curso = event.target.value;
+                },
+                cursoInvertidoMethod: function() {
+                    console.log('Method!');
+                    return this.curso.split('').reverse().join('');
                 }
             }
         });
