@@ -6,22 +6,16 @@
 </head>
 <body>
     <div id="app">
-        <button @click="login = !login">Toggle</button>
-        <template v-if="login">
-            <label>Login: </label>
-            <input type="text" placeholder="Login" key="campoLogin">
-        </template>
-        <template v-else>
-            <label>E-mail: </label>
-            <input type="email" placeholder="E-mail" key="campoEmail">
-        </template>
+        <button @click="mostrar = !mostrar">Toggle</button>
+        <!-- Com a diretiva v-show não pode-se utilizar a tag template -->
+        <p v-show="mostrar">Diretiva v-show "{{ mostrar }}"</p>
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
             data: {
-                login : true
+                mostrar : true
             }
         });
     </script>
