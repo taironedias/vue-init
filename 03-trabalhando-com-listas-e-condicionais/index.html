@@ -3,21 +3,22 @@
 <head>
     <title>Vue.js - Guia Completo</title>
     <script type="text/javascript" src="https://unpkg.com/vue"></script>
+    <style>
+        .separador {
+            list-style: none;
+            border-bottom: 1px solid #000;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
         <h1>Produtos: </h1>
         <ul>
-            <li v-for="produto in produtos">{{ produto.nome }}</li>
+            <template v-for="produto in produtos">
+                <li>{{ produto.nome }}</li>
+                <li class="separador"></li>
+            </template>
         </ul>
-
-        <!-- Recomenda-se utilizar essa forma abaixo, pois o Vue.js se precisar manipular o elemento (ordenação por exemplo), os elementos html serão trocados no DOM, diferente do caso acima, onde só o conteúdo será alterado -->
-        <ul>
-            <li v-for="produto in produtos" :key="produto.id">{{ produto.nome }}</li>
-        </ul>
-
-        <button @click="produtos.reverse()">INVERTER LISTA</button>
-        <button @click="addProduto">ADD PRODUTO</button>
     </div>
 
     <script type="text/javascript">
@@ -30,12 +31,6 @@
                     { id: 3, nome: 'Mouse' },
                     { id: 4, nome: 'Gabinete' }
                 ]
-            },
-            methods: {
-                addProduto: function() {
-                    let id = this.produtos.length + 1;
-                    this.produtos.push({ id: id, nome: 'Produto '+id });
-                }
             }
         });
     </script>
