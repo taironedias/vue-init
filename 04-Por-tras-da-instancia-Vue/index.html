@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Vue.js - Guia Completo</title>
+    <title>Vue.js</title>
     <script type="text/javascript" src="https://unpkg.com/vue"></script>
 </head>
 <body>
     <div id="app">
-        <h2>Instância Vue</h2>
-        <p> {{ titulo }} </p>
-
-        <h3>Propriedades dinâmicas</h3>
-        <p>{{ newProperty }}</p>
-        <p> {{ usuario }} </p>
+        <h2 ref="myTitle"> {{ titulo }} </h2>
+        <button @click="alterarTitulo">Alterar titulo</button>
     </div>
 
     <script type="text/javascript" src="app.js"></script>
