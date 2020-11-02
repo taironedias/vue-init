@@ -1,21 +1,12 @@
-let vm = new Vue({
-    data: {
-        curso: 'Curso de Vue.js'
-    }
-});
+Vue.component('meu-component', {
+    template: '<h2>Curso de Vue.js</h2>'
+})
 
-/* (i) forma */
-// vm.$mount('#app');
-setTimeout(() => {
-    vm.$mount('#app');
-}, 2000);
+let vm1 = new Vue({
+    el: '#app1'
+});
 
 let vm2 = new Vue({
-    template: '<h2>Utilizando propriedade template</h2>'
+    el: '#app2',
+    template: '<div><h2>Instância 02</h2><meu-component></meu-component></div>'
 });
-
-/* (ii) forma */
-// vm2.$mount('#app2');
-/* (iii) forma */
-vm2.$mount();
-document.getElementById('app2').appendChild(vm2.$el);
