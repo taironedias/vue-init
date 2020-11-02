@@ -6,15 +6,37 @@
 </head>
 <body>
     <div id="app">
-        <h1>Números</h1>
+        <h1>Produtos: </h1>
         <ul>
-            <li v-for="(value, index) in 30">[{{ index }}] {{ value }}</li>
+            <li v-for="produto in produtos">{{ produto.nome }}</li>
         </ul>
+
+        <!-- Recomenda-se utilizar essa forma abaixo, pois o Vue.js se precisar manipular o elemento (ordenação por exemplo), os elementos html serão trocados no DOM, diferente do caso acima, onde só o conteúdo será alterado -->
+        <ul>
+            <li v-for="produto in produtos" :key="produto.id">{{ produto.nome }}</li>
+        </ul>
+
+        <button @click="produtos.reverse()">INVERTER LISTA</button>
+        <button @click="addProduto">ADD PRODUTO</button>
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
+            data: {
+                produtos: [
+                    { id: 1, nome: 'Monitor' },
+                    { id: 2, nome: 'Teclado' },
+                    { id: 3, nome: 'Mouse' },
+                    { id: 4, nome: 'Gabinete' }
+                ]
+            },
+            methods: {
+                addProduto: function() {
+                    let id = this.produtos.length + 1;
+                    this.produtos.push({ id: id, nome: 'Produto '+id });
+                }
+            }
         });
     </script>
 </body>
