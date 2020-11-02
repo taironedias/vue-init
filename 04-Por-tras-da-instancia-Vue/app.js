@@ -1,19 +1,21 @@
 let vm = new Vue({
-    el: '#app',
     data: {
-        titulo: 'Curso de Vue.js'
-    },
-    methods: {
-        alterarTitulo: function(event) {
-            this.$refs.myTitle.innerText = 'Vue por refs';
-            this.$refs.myTitle.style.color = '#f90';
-            /* Fazendo dessa forma, o Vue perde a referência da interpolação, logo, não será possível alterar a o valor do titulo pela propriedade data, como no exemplo abaixo: */
-            let self = this;
-            setTimeout(() => {
-                self.titulo = 'Vue pela propriedade data'
-            }, 3000);
-        }
+        curso: 'Curso de Vue.js'
     }
 });
 
-console.log(vm);
+/* (i) forma */
+// vm.$mount('#app');
+setTimeout(() => {
+    vm.$mount('#app');
+}, 2000);
+
+let vm2 = new Vue({
+    template: '<h2>Utilizando propriedade template</h2>'
+});
+
+/* (ii) forma */
+// vm2.$mount('#app2');
+/* (iii) forma */
+vm2.$mount();
+document.getElementById('app2').appendChild(vm2.$el);
