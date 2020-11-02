@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vue.js - Guia Completo</title>
+    <script type="text/javascript" src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app1">
+        <h2>Instância 1</h2>
+        <h3 v-if="showMessage">Título alterado</h3>
+        <p>Título: {{ titulo }} </p>
+        <p>Título Kebab Case: {{ tituloKebabCase }} </p>
+        <input v-model="newTitulo">
+        <button @click="alterarTitulo">Alterar título</button>
+    </div>
+    <hr>
+    <div id="app2">
+        <h2>Instância 2</h2>
+        <p>Título: {{ titulo }} </p>
+        <button @click="alterarTitulo">Alterar titulo VM1</button>
+    </div>
+
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>
