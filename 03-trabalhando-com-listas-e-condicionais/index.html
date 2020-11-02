@@ -6,16 +6,24 @@
 </head>
 <body>
     <div id="app">
-        <button @click="mostrar = !mostrar">Toggle</button>
-        <!-- Com a diretiva v-show não pode-se utilizar a tag template -->
-        <p v-show="mostrar">Diretiva v-show "{{ mostrar }}"</p>
+        <h1>Heróis</h1>
+        <ul>
+            <li v-for="item in herois">{{ universo}}: <strong>{{ item }}</strong></li>
+        </ul>
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
             data: {
-                mostrar : true
+                universo : 'Marvel',
+                herois: [
+                    'Iron Man',
+                    'Thor',
+                    'Hulk',
+                    'Pantera Negra',
+                    'Homem-Aranha'
+                ]
             }
         });
     </script>
