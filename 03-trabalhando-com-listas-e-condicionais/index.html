@@ -8,49 +8,43 @@
     <div id="app">
         <h1>Cursos: </h1>
         <ul>
-            <li v-for="curso in cursos" :key="curso.id">{{ curso.titulo }}</li>
+            <li v-for="(value, key, index) in cursos" :key="index"> {{ key }}: <b>{{ value }}</b></li>
         </ul>
 
-        <button @click="addCurso">Adicionar curso</button>
-        <button @click="cursos = cursos.slice(0,4)">Substituir array</button>
-        <button @click="substituirCurso">Substituir curso</button>
-        <button @click="cortarArray">Cortar array</button>
+        <button @click="adicionarPropriedade">Adicionar propriedade</button>
+        <button @click="addVariasPropriedades">Adicionar várias propriedades</button>
+        <button @click="substituirPropriedades">Substituir propriedades</button>
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
             data: {
-                cursos: [
-                    { id: 1, titulo: 'JavaScript' },
-                    { id: 2, titulo: 'Vue.js' },
-                    { id: 3, titulo: 'Vuex' },
-                    { id: 4, titulo: 'VueRouter' },
-                    { id: 5, titulo: 'GraphQL' }
-                ]
+                cursos: {
+                    id: 1,
+                    titulo: 'Vue.js',
+                    plataforma: 'Udemy'
+                }
             },
             methods: {
-                addCurso: function(event) {
-                    let id = this.cursos.length + 1;
-                    this.cursos.push({ id: id, titulo: 'Curso '+id });
+                adicionarPropriedade: function(event) {
+                    /* (i) alternativa: utilizando método estático do Vue */
+                    // Vue.set(this.cursos, 'preco', 259.99);
+                    /* (ii) alternativa: utilizando método de instância do Vue */
+                    this.$set(this.cursos, 'preco', 259.99);
                 },
-                substituirCurso: function(event) {
-                    let tam = this.cursos.length;
-                    let index = Math.round(tam / 2);
-                    let newCurso = { id: (tam + 1), titulo: 'Curso '+(tam + 1) };
-                    console.log(tam, index);
-                    // this.cursos[index] = newCurso; /* Não reativo */
-                    /* (i) alternativa */
-                    // Vue.set(this.cursos, index, newCurso);
-                    /* (ii) alternativa */
-                    // this.$set(this.cursos, index, newCurso);
-                    /* (iii) alternativa: recurso do próprio javascript. O splice o primeiro parâmetro é a posição que será removida, o segundo parâmetro é a quantidade a ser removida e o terceiro é os valores novos que serão inseridos nessa possição */
-                    this.cursos.splice(index, 1, newCurso);
+                addVariasPropriedades: function(event) {
+                    this.cursos = Object.assign({}, this.cursos, {
+                        'preco': 259.99,
+                        'certificado': true
+                    });
                 },
-                cortarArray: function(event) {
-                    // this.cursos.length = 2; /* Não reativo */
-                    this.cursos.splice(2); /* O splice irá remover tanto a posição 2 quanto as posições a frente */
-                }
+                substituirPropriedades: function(event) {
+                    this.cursos = Object.assign({}, {
+                        'preco': 259.99,
+                        'certificado': true
+                    });
+                },
             }
         });
     </script>
