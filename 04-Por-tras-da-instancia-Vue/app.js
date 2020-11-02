@@ -1,42 +1,17 @@
-let vm1 = new Vue({
-    el: '#app1',
+let vm = new Vue({
+    el: '#app',
     data: {
-        showMessage: false,
-        titulo: 'Instância Vue 1',
-        newTitulo: ''
-    },
-    computed: {
-        tituloKebabCase: function() {
-            return this.titulo.toLowerCase().split(' ').join('-');
-        }
-    },
-    watch: {
-        titulo: function(newValue, oldValue) {
-            console.log(`Título alterado de ${oldValue} para ${newValue}`);
-            this.showMessage = true;
-            let self = this;
-            setTimeout(() => {
-                self.showMessage = false;
-            }, 2000);
-        }
-    },
-    methods: {
-        alterarTitulo: function(event) {
-            this.titulo = this.newTitulo;
-            this.newTitulo = ''; /* reset no valor do input */
-        }
-    }
-
-});
-
-let vm2 = new Vue({
-    el: '#app2',
-    data: {
-        titulo: 'Instância Vue 2'
-    },
-    methods: {
-        alterarTitulo: function(event) {
-            vm1.titulo = 'Curso de Vue.js 1';
-        }
+        titulo: 'Curso de Vue.js',
+        usuario: {}
     }
 });
+
+console.log(vm);
+setTimeout(() => {
+    vm.newProperty = 'Nova propriedade'; // NÃO REATIVO, porém como estou chamado o comando abaixo, o valor dessa propriedade acaba sendo exibida no dom. ou seja, como é não reativo essa propriedade fica dependente de qualquer alteração na interface, para que seu valor seja exibibo
+    Vue.set(vm.usuario, 'nome', 'Tairone Dias');
+    setTimeout(() => {
+        vm.newProperty = 'Nova propriedade alterada.';
+        Vue.set(vm.usuario, 'email', 'tairone@email.com');
+    }, 2000);
+}, 2000);

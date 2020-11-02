@@ -5,19 +5,13 @@
     <script type="text/javascript" src="https://unpkg.com/vue"></script>
 </head>
 <body>
-    <div id="app1">
-        <h2>Instância 1</h2>
-        <h3 v-if="showMessage">Título alterado</h3>
-        <p>Título: {{ titulo }} </p>
-        <p>Título Kebab Case: {{ tituloKebabCase }} </p>
-        <input v-model="newTitulo">
-        <button @click="alterarTitulo">Alterar título</button>
-    </div>
-    <hr>
-    <div id="app2">
-        <h2>Instância 2</h2>
-        <p>Título: {{ titulo }} </p>
-        <button @click="alterarTitulo">Alterar titulo VM1</button>
+    <div id="app">
+        <h2>Instância Vue</h2>
+        <p> {{ titulo }} </p>
+
+        <h3>Propriedades dinâmicas</h3>
+        <p>{{ newProperty }}</p>
+        <p> {{ usuario }} </p>
     </div>
 
     <script type="text/javascript" src="app.js"></script>
