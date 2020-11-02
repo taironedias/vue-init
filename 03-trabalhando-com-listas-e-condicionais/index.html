@@ -8,7 +8,7 @@
     <div id="app">
         <h1>Heróis</h1>
         <ul>
-            <li v-for="item in herois">{{ universo}}: <strong>{{ item }}</strong></li>
+            <li v-for="(item, index) in herois">{{ universo}}: <strong>{{ index }}-{{ item }}</strong></li>
         </ul>
     </div>
 
