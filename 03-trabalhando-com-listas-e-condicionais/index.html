@@ -1,39 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Vue.js - Guia Completo</title>
+    <title>Vue.js</title>
     <script type="text/javascript" src="https://unpkg.com/vue"></script>
 </head>
 <body>
     <div id="app">
-        <h1>Tarefas: </h1>
+        <h1>Cursos: </h1>
         <ul>
-            <li v-for="tarefa in tarefas" :key="tarefa.id" v-if="!tarefa.completa">{{ tarefa.titulo }}</li>
+            <li v-for="curso in cursos" :key="curso.id">{{ curso.titulo }}</li>
         </ul>
 
-        <h1>Tarefas a fazer: </h1>
-        <ul v-if="tarefasIncompletas.length">
-            <li v-for="tarefa in tarefasIncompletas" :key="tarefa.id">{{ tarefa.titulo }}</li>
-        </ul>
-        <p v-else>Não há tarefas a fazer!</p>
+        <button @click="addCurso">Adicionar curso</button>
+        <button @click="cursos = cursos.slice(0,4)">Substituir array</button>
+        <button @click="substituirCurso">Substituir curso</button>
+        <button @click="cortarArray">Cortar array</button>
     </div>
 
     <script type="text/javascript">
         new Vue({
             el: '#app',
             data: {
-                tarefas: [
-                    { id: 1, titulo: 'Aprender JavaScript', completa: true },
-                    { id: 2, titulo: 'Aprender Vue.js', completa: false },
-                    { id: 3, titulo: 'Aprender Vuex', completa: false },
-                    { id: 4, titulo: 'Aprender VueRouter', completa: false }
+                cursos: [
+                    { id: 1, titulo: 'JavaScript' },
+                    { id: 2, titulo: 'Vue.js' },
+                    { id: 3, titulo: 'Vuex' },
+                    { id: 4, titulo: 'VueRouter' },
+                    { id: 5, titulo: 'GraphQL' }
                 ]
             },
-            computed: {
-                tarefasIncompletas: function() {
-                    return this.tarefas.filter((tarefa) => {
-                        return !tarefa.completa;
-                    });
+            methods: {
+                addCurso: function(event) {
+                    let id = this.cursos.length + 1;
+                    this.cursos.push({ id: id, titulo: 'Curso '+id });
+                },
+                substituirCurso: function(event) {
+                    let tam = this.cursos.length;
+                    let index = Math.round(tam / 2);
+                    let newCurso = { id: (tam + 1), titulo: 'Curso '+(tam + 1) };
+                    console.log(tam, index);
+                    // this.cursos[index] = newCurso; /* Não reativo */
+                    /* (i) alternativa */
+                    // Vue.set(this.cursos, index, newCurso);
+                    /* (ii) alternativa */
+                    // this.$set(this.cursos, index, newCurso);
+                    /* (iii) alternativa: recurso do próprio javascript. O splice o primeiro parâmetro é a posição que será removida, o segundo parâmetro é a quantidade a ser removida e o terceiro é os valores novos que serão inseridos nessa possição */
+                    this.cursos.splice(index, 1, newCurso);
+                },
+                cortarArray: function(event) {
+                    // this.cursos.length = 2; /* Não reativo */
+                    this.cursos.splice(2); /* O splice irá remover tanto a posição 2 quanto as posições a frente */
                 }
             }
         });
