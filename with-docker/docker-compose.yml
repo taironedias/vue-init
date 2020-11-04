@@ -1,0 +1,13 @@
+version: "3"
+services:
+  workzone:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: vue ui --host 0.0.0.0 --port 8000 --headless
+    volumes:
+      - ./code:/code:z
+      - .vuerc:/root/.vuerc:z
+    ports:
+      - 8000:8000
+      - 8080:8080

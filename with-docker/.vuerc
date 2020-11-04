@@ -1,0 +1,19 @@
+{
+  "useTaobaoRegistry": false,
+  "latestVersion": "4.5.8",
+  "lastChecked": 1604344230825,
+  "presets": {
+    "vue-default-preset": {
+      "useConfigFiles": false,
+      "plugins": {
+        "@vue/cli-plugin-babel": {},
+        "@vue/cli-plugin-eslint": {
+          "config": "standard",
+          "lintOn": [
+            "save"
+          ]
+        }
+      }
+    }
+  }
+}
