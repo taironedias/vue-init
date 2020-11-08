@@ -1,8 +1,14 @@
 import Vue from 'vue'
-import App from './App.vue'
 
-Vue.config.productionTip = false
+Vue.component('tcd-component', {
+  data: function() {
+    return {
+      titulo: 'Curso de Vue.js'
+    }
+  },
+  template: '<h2>{{ titulo }}</h2>'
+})
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  el: '#app'
+})
