@@ -1,12 +1,25 @@
 import Vue from 'vue'
 
+const data = {
+  titulo: 'Curso de Vue.js',
+  contador: 0
+}
+
 Vue.component('tcd-component', {
   data: function() {
-    return {
-      titulo: 'Curso de Vue.js'
+    return data
+  },
+  methods: {
+    incrementar: function() {
+      this.contador++
     }
   },
-  template: '<h2>{{ titulo }}</h2>'
+  template: `
+    <div>
+      <h2>{{ titulo }}</h2>
+      <button @click="incrementar">Clicado {{ contador }} vezes</button>
+    </div>
+  `
 })
 
 new Vue({
