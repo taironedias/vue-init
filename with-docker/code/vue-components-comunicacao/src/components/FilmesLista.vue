@@ -5,9 +5,9 @@
             <h2>Filmes</h2>
 
             <div class="list-group list-group-flush">
-                <FilmesListaItem/>
-                <FilmesListaItem/>
-                <FilmesListaItem/>
+                <FilmesListaItem filmeTitulo="Capitão Marvel"/>
+                <FilmesListaItem filmeTitulo="Vingadores: Guerra Infinita" />
+                <FilmesListaItem filmeTitulo="Homem-Aranha: Longe de Casa"/>
             </div>
         </div>
 
