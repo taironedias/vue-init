@@ -5,9 +5,7 @@
             <h2>Filmes</h2>
 
             <div class="list-group list-group-flush">
-                <FilmesListaItem filmeTitulo="Capitão Marvel"/>
-                <FilmesListaItem filmeTitulo="Vingadores: Guerra Infinita" />
-                <FilmesListaItem filmeTitulo="Homem-Aranha: Longe de Casa"/>
+                <FilmesListaItem v-for="(filme, index) in filmes" :key="index" :filmeTitulo="filme"/>
             </div>
         </div>
 
@@ -26,6 +24,16 @@ export default {
     components: {
         FilmesListaItem,
         FilmesListaItemInfo
+    },
+    data() {
+        return {
+            filmes: [
+                'Capitão Marvel',
+                'Vingadores: Guerra Infinita',
+                'Homem-Aranha: Longe de Casa',
+                'Viúva Negra'
+            ]
+        }
     }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <li class="list-group-item">
         <span>{{ filmeTitulo }}</span>
-        <button class="btn btn-success float-right">Editar</button>
+        <button class="btn btn-success float-right">Selecionar</button>
     </li>
 </template>
 
