@@ -12,12 +12,7 @@
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
 
-    <div id="app">
-      <!-- Essa forma não é possível ser utilizada diretamente no DOM (apenas dentro da tag template do Vue), pois nesse caso o Vue não faz a conversão -->
-      <!-- <AppHeader></AppHeader> -->
-      <!-- Essa é a forma correta (kebab-case) mesmo o registro estando no formato PascalCase -->
-      <app-header></app-header>
-    </div>
+    <div id="app"></div>
 
     <!-- built files will be auto injected -->
   </body>
