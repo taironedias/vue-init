@@ -14,8 +14,8 @@
 
 <script>
 
-import AppContador from './AppContador.vue';
-import AppHeader from './AppHeader.vue';
+import AppHeader from './components/AppHeader.vue';
+import AppContador from './components/AppContador.vue';
 
 export default {
     components: {
