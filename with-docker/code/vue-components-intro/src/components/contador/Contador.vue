@@ -1,3 +1,4 @@
+/* Normalmente utiliza-se o prefixo App, Basic ou V para components base, components que montam o layout da aplicação */
 <template>
     <div>
         <h2>Clicado {{ contador }} vezes </h2>
