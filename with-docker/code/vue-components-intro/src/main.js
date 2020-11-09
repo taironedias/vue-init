@@ -1,34 +1,11 @@
 import Vue from 'vue'
 
-const data = {
-  titulo: 'Curso de Vue.js',
-  contador: 0
-}
+import App from './App.vue';
+import AppContador from './AppContador.vue';
 
-const tcdComponent = {
-  data: function() {
-    return data
-  },
-  methods: {
-    incrementar: function() {
-      this.contador++
-    }
-  },
-  template: `
-    <div>
-      <h2>{{ titulo }}</h2>
-      <button @click="incrementar">Clicado {{ contador }} vezes</button>
-    </div>
-  `
-}
+Vue.component('app-contador', AppContador)
 
 new Vue({
-  el: '#app1',
-  components: {
-    'tcd-component': tcdComponent
-  }
-})
-
-new Vue({
-  el: '#app2'
+  el: '#app',
+  render: h => h(App)
 })
