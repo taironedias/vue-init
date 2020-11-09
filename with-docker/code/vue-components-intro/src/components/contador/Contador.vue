@@ -1,7 +1,7 @@
 /* Normalmente utiliza-se o prefixo App, Basic ou V para components base, components que montam o layout da aplicação */
 <template>
     <div>
-        <h2>Clicado {{ contador }} vezes </h2>
+        <h3>Clicado {{ contador }} vezes </h3>
         <button @click="incrementar">Incrementar ++</button>
     </div>
 </template>
@@ -20,3 +20,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    div {
+        border: 1px solid red;
+    }
+</style>
