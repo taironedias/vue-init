@@ -5,7 +5,7 @@ const data = {
   contador: 0
 }
 
-Vue.component('tcd-component', {
+const tcdComponent = {
   data: function() {
     return data
   },
@@ -20,10 +20,13 @@ Vue.component('tcd-component', {
       <button @click="incrementar">Clicado {{ contador }} vezes</button>
     </div>
   `
-})
+}
 
 new Vue({
-  el: '#app1'
+  el: '#app1',
+  components: {
+    'tcd-component': tcdComponent
+  }
 })
 
 new Vue({
