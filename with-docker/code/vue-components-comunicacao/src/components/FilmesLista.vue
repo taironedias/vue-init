@@ -5,10 +5,14 @@
             <h2>Filmes</h2>
 
             <ul class="list-group list-group-flush">
-                <!-- Essa é a forma simple, pois o objeto filme possue poucos atributos. -->
-                <!-- <FilmesListaItem v-for="filme in filmes" :key="filme.id" :filmeTitulo="filme.title" :filmeAno="filme.ano"/> -->
-                <!-- No entanto, se existir mais atributos o código ficará muito verboso. Então, a solução que o Vue oferece é utilizando a diretiva v-bind, porém as props devem ter o mesmo nome dos atributos. Ou sjea, 'filmeTitulo' deve passar a se chamar 'titulo', a mesma coisa para 'filmeAno' que deverá ser apenas 'ano' -->
-                <FilmesListaItem v-for="filme in filmes" :key="filme.id" v-bind="filme"/>
+                <!-- a class 'dark-theme' é adicionada automaticamente pelo Vue no atributo class do component em questão, ficando assim o li com 'list-group-item dark-theme' -->
+                <FilmesListaItem
+                    v-for="filme in filmes"
+                    :key="filme.id"
+                    v-bind="filme"
+                    class="dark-theme"
+                    placeholder="Título do filme"
+                />
             </ul>
         </div>
 
@@ -31,10 +35,10 @@ export default {
     data() {
         return {
             filmes: [
-                { id: 1, title: 'Capitão Marvel', year: 2019},
-                { id: 2, title: 'Vingadores: Guerra Infinita', year: 2019},
-                { id: 3, title: 'Homem-Aranha: Longe de Casa', year: 2019},
-                { id: 4, title: 'Viúva Negra', year: 2021}
+                { id: 1, title: 'Capitão Marvel', year: 2019, director: 'Stan Lee'},
+                { id: 2, title: 'Vingadores: Guerra Infinita', year: 2019, director: 'Stan Lee'},
+                { id: 3, title: 'Homem-Aranha: Longe de Casa', year: 2019, director: 'Stan Lee'},
+                { id: 4, title: 'Viúva Negra', year: 2021, director: 'Stan Lee'}
             ]
         }
     }
