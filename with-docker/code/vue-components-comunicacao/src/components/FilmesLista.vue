@@ -5,13 +5,10 @@
             <h2>Filmes</h2>
 
             <ul class="list-group list-group-flush">
-                <!-- a class 'dark-theme' é adicionada automaticamente pelo Vue no atributo class do component em questão, ficando assim o li com 'list-group-item dark-theme' -->
                 <FilmesListaItem
                     v-for="filme in filmes"
                     :key="filme.id"
-                    v-bind="filme"
-                    class="dark-theme"
-                    placeholder="Título do filme"
+                    :filme="filme"
                 />
             </ul>
         </div>

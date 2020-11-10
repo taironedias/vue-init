@@ -1,33 +1,17 @@
 <template>
-    <div>
-        <input type="text" :value="title" :placeholder="$attrs.placeholder">
-    </div>
-    <!-- <li class="list-group-item">
-        <span>{{ filmeTituloConcat }} ({{ year }})</span>
+    <li class="list-group-item">
+        <span>{{ filme.title }} ({{ filme.year }})</span>
         <button class="btn btn-success float-right">Selecionar</button>
-    </li> -->
+    </li>
 </template>
 
 <script>
 export default {
-    inheritAttrs: false, // Especifica se deseja herdar ou não os atributos do elemento root. Assim, podemos passar atributos customizáveis e utilizá-los nos elementos desejados. 
     props: {
-        title: {
-            type: String,
-            required: true,
-        },
-        year: {
-            type: Number,
+        filme: {
+            type: Object,
             required: true
         }
-    },
-    computed: {
-        filmeTituloConcat() {
-            return `Titulo: ${this.title}`
-        }
-    },
-    created() {
-        console.log('Attrs: ', this.$attrs);
     }
 }
 </script>
