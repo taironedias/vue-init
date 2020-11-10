@@ -8,7 +8,20 @@
 <script>
 export default {
     props: {
-        filmeTitulo: String /* Caso deseje informar que o props pode receber mais de um tipo, basta passar um array das seguinte forma: [String, Number] */
+        filmeTitulo: {
+            type: String,               // Especifica a tipagem da props
+            // required: true,             // Informa que a props deve ser obrigatoria ao utilizar o component
+            // default: 'Titulo padrão'    // Define um valor padrão caso o valor da props não seja passada, mas essa forma é valida apenas para tipos primitivos String, Number e Boolean. Obviamente se utilizar o required não faz sentido utilizar o default e, vice-versa.
+            // Para outros tipos não primitivos (e também os tipos primitivos), o default deve ser uma função retornando o tipo, por exemplo:
+            default() {
+                // return ['retorna o array', 'etc']
+                return 'Vingadores'
+            },
+            validator(value) {
+                return value.includes('Marvel')
+            }
+            /**NOTA: dentro das funções default e validator não temos acesso as propriedades, pois elas são carregadas pelo Vue antes do lifecycle created */
+        }
     },
     computed: {
         filmeTituloConcat() {
