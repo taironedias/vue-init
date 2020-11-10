@@ -4,9 +4,9 @@
         <div class="col-8">
             <h2>Filmes</h2>
 
-            <div class="list-group list-group-flush">
+            <ul class="list-group list-group-flush">
                 <FilmesListaItem v-for="(filme, index) in filmes" :key="index" :filmeTitulo="filme"/>
-            </div>
+            </ul>
         </div>
 
         <!-- column 2 -->
