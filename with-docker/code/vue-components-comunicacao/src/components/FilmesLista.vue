@@ -9,6 +9,7 @@
                     v-for="movie in movies"
                     :key="movie.id"
                     :movie="movie"
+                    :class="setActiveMovie(movie.id)"
                     @movieSelected="movieSelected = $event"
                 />
             </ul>
@@ -39,6 +40,13 @@ export default {
                 { id: 4, title: 'Viúva Negra', year: 2021, director: 'Stan Lee'}
             ],
             movieSelected: undefined
+        }
+    },
+    methods: {
+        setActiveMovie(movie_id) {
+            return {
+                active: this.movieSelected && this.movieSelected.id === movie_id
+            }
         }
     }
 }
