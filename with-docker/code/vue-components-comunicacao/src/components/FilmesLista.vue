@@ -10,14 +10,13 @@
                     :key="movie.id"
                     :movie="movie"
                     :class="setActiveMovie(movie.id)"
-                    @movieSelected="movieSelected = $event"
                 />
             </ul>
         </div>
 
         <!-- column 2 -->
         <div class="col-4">
-            <FilmesListaItemInfo :movie="movieSelected"/>
+            <FilmesListaItemInfo/>
         </div>
     </div>
 </template>
@@ -25,6 +24,7 @@
 <script>
 import FilmesListaItem from './FilmesListaItem.vue';
 import FilmesListaItemInfo from './FilmesListaItemInfo.vue';
+import { eventBus } from './../main';
 
 export default {
     components: {
@@ -48,6 +48,11 @@ export default {
                 active: this.movieSelected && this.movieSelected.id === movie_id
             }
         }
+    },
+    created() {
+        eventBus.$on('movieSelected', (value) => {
+            this.movieSelected = value
+        })
     }
 }
 </script>

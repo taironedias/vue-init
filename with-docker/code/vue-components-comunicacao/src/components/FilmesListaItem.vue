@@ -6,6 +6,9 @@
 </template>
 
 <script>
+
+import { eventBus } from './../main';
+
 export default {
     props: {
         movie: {
@@ -15,7 +18,8 @@ export default {
     },
     methods: {
         chooseMovie() {
-            this.$emit('movieSelected', this.movie)
+            // this.$emit('movieSelected', this.movie)
+            eventBus.$emit('movieSelected', this.movie)
         }
     }
 }
