@@ -17,7 +17,7 @@
 
         <!-- column 2 -->
         <div class="col-4">
-            <FilmesListaItemInfo/>
+            <FilmesListaItemInfo :movie="movieSelected"/>
         </div>
     </div>
 </template>
