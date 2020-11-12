@@ -62,12 +62,19 @@ export default {
         editMovie(value) {
             this.edit = true
             this.movieSelected = value
+        },
+        updateMovie(movieUpdated) {
+            const index = this.movies.findIndex(movie => movie.id === movieUpdated.id);
+            this.movies.splice(index, 1, movieUpdated);
+            this.movieSelected = undefined;
+            this.edit = false;
         }
     },
     created() {
         eventBus.$on('movieSelected', (value) => {
             this.movieSelected = value
-        })
+        }),
+        eventBus.$on('updateMovie', this.updateMovie)
     }
 }
 </script>

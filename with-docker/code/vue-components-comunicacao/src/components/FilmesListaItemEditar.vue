@@ -23,10 +23,16 @@
                 @input="movieSelected = { key: 'year', value: parseInt($event.target.value) }"
             >
         </div>
+
+        <button @click="saveMovie" class="btn btn-primary float-right">Salvar</button>
+
     </div>
 </template>
 
 <script>
+
+import { eventBus } from './../main';
+
 export default {
     props: {
         movie: {
@@ -44,13 +50,19 @@ export default {
             set(data) {
                 this.movieLocal = Object.assign(
                     {},
-                    this.movie,
+                    this.movieLocal,
                     { [data.key]: data.value }
                 )
             },
             get() {
                 return this.movie
             }
+        }
+    },
+    methods: {
+        saveMovie() {
+            // this.$emit('updateMovie', this.movieLocal)
+            eventBus.updateMovie(this.movieLocal)
         }
     }
 }

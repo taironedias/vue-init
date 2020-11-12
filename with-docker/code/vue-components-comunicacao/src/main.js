@@ -7,6 +7,9 @@ export const eventBus = new Vue({
   methods: {
     movieSelected(value) {
       this.$emit('movieSelected', value)
+    },
+    updateMovie(value) {
+      this.$emit('updateMovie', value)
     }
   }
 })
