@@ -59,6 +59,14 @@ export default {
             }
         }
     },
+    watch: {
+        movieSelected: {
+            deep: true,
+            handler: function (newVal) {
+                this.movieLocal = newVal
+            }
+        }
+    },
     methods: {
         saveMovie() {
             // this.$emit('updateMovie', this.movieLocal)
