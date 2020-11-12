@@ -6,7 +6,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ movie.title }} ({{ movie.year }})</h5>
                 <span class="font-italic">Diretor: {{ movie.director }}</span>
-                <button class="btn btn-danger float-right">Editar</button>
+                <button @click="edit" class="btn btn-danger float-right">Editar</button>
             </div>
         </div>
 
@@ -28,6 +28,11 @@ export default {
         eventBus.$on('movieSelected', (value) => {
             this.movie = value
         })
+    },
+    methods: {
+        edit() {
+            this.$emit('editMovie', this.movie)
+        }
     }
 }
 </script>

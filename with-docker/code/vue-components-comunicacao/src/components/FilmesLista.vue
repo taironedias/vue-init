@@ -16,7 +16,15 @@
 
         <!-- column 2 -->
         <div class="col-4">
-            <FilmesListaItemInfo/>
+            <FilmesListaItemInfo
+                v-if="!edit"
+                @editMovie="editMovie"
+            />
+
+            <FilmesListaItemEditar
+                v-else
+                :movie="movieSelected"
+            />
         </div>
     </div>
 </template>
@@ -24,12 +32,14 @@
 <script>
 import FilmesListaItem from './FilmesListaItem.vue';
 import FilmesListaItemInfo from './FilmesListaItemInfo.vue';
+import FilmesListaItemEditar from './FilmesListaItemEditar.vue';
 import { eventBus } from './../main';
 
 export default {
     components: {
         FilmesListaItem,
-        FilmesListaItemInfo
+        FilmesListaItemInfo,
+        FilmesListaItemEditar
     },
     data() {
         return {
@@ -39,7 +49,8 @@ export default {
                 { id: 3, title: 'Homem-Aranha: Longe de Casa', year: 2019, director: 'Stan Lee'},
                 { id: 4, title: 'Viúva Negra', year: 2021, director: 'Stan Lee'}
             ],
-            movieSelected: undefined
+            movieSelected: undefined,
+            edit: false
         }
     },
     methods: {
@@ -47,6 +58,10 @@ export default {
             return {
                 active: this.movieSelected && this.movieSelected.id === movie_id
             }
+        },
+        editMovie(value) {
+            this.edit = true
+            this.movieSelected = value
         }
     },
     created() {
