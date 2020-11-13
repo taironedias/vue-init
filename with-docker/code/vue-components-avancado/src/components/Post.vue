@@ -6,11 +6,15 @@
         </div>
 
         <div class="post-conteudo">
-            <slot name="conteudo"></slot>
+            <slot></slot>
         </div>
 
         <div class="post-rodape">
             <slot name="rodape"></slot>
+            <a href="#" class="link">
+                <!-- Esse é um exemplo, caso não passe no meu component pai um elemento com esse nome de slot. Aí o texto 'Ler mais...', será exibido -->
+                <slot name="link">Ler mais...</slot>
+            </a>
         </div>
 
     </div>
@@ -32,5 +36,9 @@
 
     .post-rodape {
         font-style: italic;
+    }
+
+    .link {
+        float: right;
     }
 </style>
