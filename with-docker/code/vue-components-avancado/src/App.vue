@@ -5,16 +5,10 @@
     <Post>
       <h3 slot="cabecalho">Components no Vue.js</h3>
 
-      <p>Components são instâncias reutilizáveis no Vue.js com nome.</p>
-      <p>Componentes podem ser reutilizados quantas vezes você quiser</p>
+      <p class="post-paragrafo">Components são instâncias reutilizáveis no Vue.js com nome. Componentes podem ser reutilizados quantas vezes você quiser.</p>
       <p>...</p>
 
-      <small slot="rodape">por Tairone Dias</small>
-
-      <!-- Comente o template abaixo, para verificar o conteúdo default em slots -->
-      <template slot="link">
-        Detalhes...
-      </template>
+      <small slot="rodape">por {{ autor }}</small>
     </Post>
 
   </div>
@@ -27,6 +21,11 @@ import Post from './components/Post';
 export default {
   components: {
     Post
+  },
+  data() {
+    return {
+      autor: 'Tairone'
+    }
   }
 }
 </script>
@@ -36,4 +35,9 @@ export default {
     width: 960px;
     margin: auto;
   }
+
+  /* descomentar para perceber que a estilização, apesar de estar no component pai, é aplicada no slot existente no component filho */
+  /* .post-paragrafo {
+    color: red;
+  } */
 </style>
