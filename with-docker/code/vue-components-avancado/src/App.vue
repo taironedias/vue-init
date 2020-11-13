@@ -1,14 +1,15 @@
 <template>
-  <div id="app">
+  <div id="app" class="container">
     <h1>Vue JS</h1>
 
-    <Post titulo="Components no Vue">
-      <h3>Components no Vue.js</h3>
-      <p>Components são propriedades mais importantes no Vue.js</p>
+    <Post>
+      <h3 slot="cabecalho">Components no Vue.js</h3>
+      <template slot="conteudo">
+        <p>Components são instâncias reutilizáveis no Vue.js com nome.</p>
+        <p>...</p>
+      </template>
+      <small slot="rodape">por Tairone Dias</small>
     </Post>
-
-    <Post titulo="Passando dados via props"/>
-
 
   </div>
 </template>
@@ -23,3 +24,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .container {
+    width: 960px;
+    margin: auto;
+  }
+</style>
