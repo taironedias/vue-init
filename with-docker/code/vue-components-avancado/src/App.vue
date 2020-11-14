@@ -25,7 +25,23 @@ import Sobre from './components/Sobre';
 
 export default {
   components: {
-    Assincrono: () => import('./components/Assincrono.vue'),
+    Assincrono: () => ({
+      component: new Promise((resolve, reject) => {
+        // Só alterar entre true e false para simular o carregamento do component do loading e do error, respectivamente.
+        let state = false;
+        setTimeout(() => {
+          if (state) {
+            resolve(import('./components/Assincrono.vue'))
+          } else {
+            reject('Carregamento do Component principal falhou!')
+          }
+        }, 2000);
+      }),                                                         /* Component principal a ser carregado */
+      loading: { template:'<p>Carregando...</p>' },               /* Component que utilizado enquanto o Component principal é carregado */
+      error: { template: '<p>Erro ao carregar o Component</p>' }, /* Component que é utilizado caso ocorrer algum erro ao carregar o Component principal */
+      delay: 200,                                                 /* Tempo em ms para exibir o component de loading. O valor default é 200ms */
+      timeout: 3000                                               /* Tempo em ms para exibir o component de error. O valor default é Infinity */
+    }),
     Home,
     PostsLista,
     Sobre
