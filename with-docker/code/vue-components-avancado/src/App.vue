@@ -6,10 +6,13 @@
     <button @click="componentSelecionado = 'PostsLista'">Posts</button>
     <button @click="componentSelecionado = 'Sobre'">Sobre</button>
 
-    <component 
-      :is="componentSelecionado"
-      v-bind="propsPostsLista">
-    </component>
+    <!-- Mantém a instância do Vue em cache para não ser criada a cada chamada, pois sem o keep-alive ao sair do component ele é destruído -->
+    <keep-alive>
+      <component 
+        :is="componentSelecionado"
+        v-bind="propsPostsLista">
+      </component>
+    </keep-alive>
 
   </div>
 </template>
