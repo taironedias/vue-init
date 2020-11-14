@@ -2,34 +2,30 @@
   <div id="app" class="container">
     <h1>Vue JS</h1>
 
-    <h1>Forma Padrão</h1>
+    <button @click="componentSelecionado = 'Home'">Home</button>
+    <button @click="componentSelecionado = 'PostsLista'">Posts</button>
+    <button @click="componentSelecionado = 'Sobre'">Sobre</button>
 
-    <PostsLista :posts="posts" />
-
-    <hr>
-    <h1>Slots com escopo</h1>
-
-    <PostsLista :posts="posts" >
-      <template slot-scope="{ meuPost }">
-        <h2>{{ meuPost.titulo }}</h2>
-        <p>{{ meuPost.conteudo }}</p>
-        <small>{{ meuPost.autor }}</small>
-      </template>
-    </PostsLista>
+    <component :is="componentSelecionado"></component>
 
   </div>
 </template>
 
 <script>
 
+import Home from './components/Home';
 import PostsLista from './components/PostsLista';
+import Sobre from './components/Sobre';
 
 export default {
   components: {
-    PostsLista
+    Home,
+    PostsLista,
+    Sobre
   },
   data() {
     return {
+      componentSelecionado: 'Home',
       posts: [
         { 
           id: 1,
