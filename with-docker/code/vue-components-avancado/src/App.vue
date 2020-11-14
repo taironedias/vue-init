@@ -6,8 +6,15 @@
     <button @click="componentSelecionado = 'PostsLista'">Posts</button>
     <button @click="componentSelecionado = 'Sobre'">Sobre</button>
 
-    <!-- Mantém a instância do Vue em cache para não ser criada a cada chamada, pois sem o keep-alive ao sair do component ele é destruído -->
-    <keep-alive>
+    <!-- Tanto o include e exclude, podemos utilizar tanto de forma estática e de forma dinâmica, passando o v-bind antes (ou apenas : ). E na forma dinâmica, podemos passar uma propriedade (contendo string, array ou expressão regular) ou passar diretamente a string, array ou expressão regular. -->
+    <!-- Utilizando o include, eu mantenho em cache apenas o(s) component(s) específicado(s). No exemplo abaixo o component Sobre é mantido em cache -->
+    <!-- <keep-alive :include="'Sobre'"> -->
+    <!-- Utilizando o exclude, eu NÃO mantenho em cache o(s) component(s) específicado(s). No exemplo abaixo apenas o PostsLista é mantido em cache -->
+    <!-- <keep-alive :exclude="['Sobre', 'Home']"> -->
+    <!-- Utilizando expressão regular. No exemplo abaixo apenas o Sobre é mantido em cache -->
+    <!-- <keep-alive :exclude="/Home|PostsLista/"> -->
+    <!-- Utilizando o max, eu defino a quantidade de components que serão mantidos em cache. Sendo destruído a instância do component acessada menos recente -->
+    <keep-alive :max="2">
       <component 
         :is="componentSelecionado"
         v-bind="propsPostsLista">
