@@ -19,6 +19,13 @@ export default {
     },
     destroyed() {
         console.log('destroyed!');
+    },
+    // esses life cicle hooks, serve para identificar quando você entra no component ou quando sai
+    activated() {
+        console.log('activated!');
+    },
+    deactivated() {
+        console.log('deactivated!');
     }
 }
 </script>
