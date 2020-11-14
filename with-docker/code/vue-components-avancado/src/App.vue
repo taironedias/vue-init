@@ -6,7 +6,10 @@
     <button @click="componentSelecionado = 'PostsLista'">Posts</button>
     <button @click="componentSelecionado = 'Sobre'">Sobre</button>
 
-    <component :is="componentSelecionado"></component>
+    <component 
+      :is="componentSelecionado"
+      v-bind="propsPostsLista">
+    </component>
 
   </div>
 </template>
@@ -40,6 +43,11 @@ export default {
           autor: 'Tairone Dias'
         }
       ]
+    }
+  },
+  computed: {
+    propsPostsLista() {
+      return this.componentSelecionado === 'PostsLista' ? { posts: this.posts } : {}
     }
   }
 }
