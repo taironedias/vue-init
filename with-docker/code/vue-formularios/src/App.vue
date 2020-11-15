@@ -137,6 +137,16 @@
             </div>
 
             <div class="form-group">
+              <AppRange
+                :inputClass="{'form-control-range': true}"
+                label="Salário pretendido"
+                v-model.number="dev.salary"
+                min="1000"
+                max="15000"
+                step="200"/>
+            </div>
+
+            <div class="form-group">
 
               <div class="form-check form-check-inline">
                 <input
@@ -192,6 +202,9 @@
                 <!-- Porém, caso queira aplicar a quebras de linhas sem utilizar essa estilização do Bootstrap segue a estilização abaixo: -->
                 <!-- <div style="white-space: pre;">{{ dev.bio }}</div> -->
               </li>
+              <li class="list-group-item">
+                <strong>Salário pretendido:</strong> {{ parseFloat(dev.salary).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) }}
+              </li>
               <li class="list-group-item"><strong>Receber notificações?</strong> {{ dev.newsletter }} </li>
             </ul>
 
@@ -213,7 +226,13 @@
 </template>
 
 <script>
+
+import AppRange from './components/Range';
+
 export default {
+  components: {
+    AppRange
+  },
   data() {
     return {
       dev: {},
@@ -226,6 +245,7 @@ export default {
         stacks: [],
         bio: `"Everybody in this country should learn how to program a computer...\nbecause it teaches you how to think!"\n(Steve Jobs)
         `,
+        salary: 1000,
         newsletter: 'Sim'
       },
       occupations: [
