@@ -150,7 +150,9 @@
 
             </div>
 
-            <button class="btn btn-secondary">Resetar</button>
+            <!-- Não sei por qual motivo, mas o type="reset" e especificando na tag form o @reset="setDefaultValues", não estava funcionando como deveria -->
+            <!-- <button class="btn btn-secondary" type="reset">Resetar</button> -->
+            <button class="btn btn-secondary" type="button" @click="setDefaultValues">Resetar</button>
             <!-- <button class="btn btn-success" type="button" @click="send">Enviar</button> -->
             <button class="btn btn-success" type="submit">Enviar</button>
 
@@ -214,14 +216,16 @@
 export default {
   data() {
     return {
-      dev: {
+      dev: {},
+      defaultValues: {
         name: '',
         email: '',
-        age: 0,
+        age: null,
         genre: 'Masculino',
         occupation: '',
         stacks: [],
-        bio: 'Sou um dev!',
+        bio: `"Everybody in this country should learn how to program a computer...\nbecause it teaches you how to think!"\n(Steve Jobs)
+        `,
         newsletter: 'Sim'
       },
       occupations: [
@@ -237,7 +241,13 @@ export default {
     send() {
       const formSended = Object.assign({}, this.dev)
       console.log('Formulário Enviado!', formSended);
+    },
+    setDefaultValues() {
+      this.dev = Object.assign({}, this.defaultValues);
     }
+  },
+  created() {
+    this.setDefaultValues()
   }
 }
 </script>
