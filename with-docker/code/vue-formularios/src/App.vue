@@ -99,7 +99,11 @@
 
             <div class="form-group">
               <label>Resumo de perfil:</label>
-              <textarea class="form-control" placeholder="Conte-nos um pouco sobre você..."></textarea>
+              <textarea
+                class="form-control"
+                placeholder="Conte-nos um pouco sobre você..."
+                v-model.trim="dev.bio">
+              </textarea>
             </div>
 
             <div class="form-group">
@@ -134,7 +138,13 @@
               <li class="list-group-item"><strong>Gênero:</strong> </li>
               <li class="list-group-item"><strong>Ocupação:</strong> </li>
               <li class="list-group-item"><strong>Tecnologias:</strong> </li>
-              <li class="list-group-item"><strong>Biografia:</strong> </li>
+              <li class="list-group-item">
+                <strong>Biografia:</strong>
+                <!-- O Bootstrap já adiciona uma estilização para o elemnto pre -->
+                <pre>{{ dev.bio }}</pre>
+                <!-- Porém, caso queira aplicar a quebras de linhas sem utilizar essa estilização do Bootstrap segue a estilização abaixo: -->
+                <!-- <div style="white-space: pre;">{{ dev.bio }}</div> -->
+              </li>
               <li class="list-group-item"><strong>Receber notificações?</strong> </li>
             </ul>
 
@@ -162,7 +172,8 @@ export default {
       dev: {
         name: '',
         email: '',
-        age: 0
+        age: 0,
+        bio: 'Sou um dev!'
       }
     }
   }
