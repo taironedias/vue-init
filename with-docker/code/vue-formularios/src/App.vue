@@ -17,7 +17,7 @@
 
           <h3>Preencha abaixo</h3>
 
-          <form>
+          <form @submit.prevent="send">
 
             <div class="form-group">
               <label>Nome:</label>
@@ -151,7 +151,8 @@
             </div>
 
             <button class="btn btn-secondary">Resetar</button>
-            <button class="btn btn-success">Enviar</button>
+            <!-- <button class="btn btn-success" type="button" @click="send">Enviar</button> -->
+            <button class="btn btn-success" type="submit">Enviar</button>
 
           </form>
 
@@ -230,6 +231,12 @@ export default {
         'Desenvolvedor Mobile',
         'DevOps'
       ]
+    }
+  },
+  methods: {
+    send() {
+      const formSended = Object.assign({}, this.dev)
+      console.log('Formulário Enviado!', formSended);
     }
   }
 }
