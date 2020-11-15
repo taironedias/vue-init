@@ -77,7 +77,7 @@
               <select class="form-control" v-model="dev.occupation">
                 <option value="" disabled>Selecione uma opção...</option>
                 <option
-                  v-for="(occupation, index) in occupations.sort()"
+                  v-for="(occupation, index) in occupations"
                   :key="index"
                   :value="occupation">
                     {{ occupation }}
@@ -176,7 +176,7 @@
                 <strong>Tecnologias:</strong>
                 <ul>
                   <li
-                    v-for="(stack, index) in dev.stacks.sort()"
+                    v-for="(stack, index) in dev.stacks"
                     :key="index">
                       {{ stack }}
                   </li>
