@@ -25,7 +25,7 @@
                 type="text"
                 class="form-control"
                 placeholder="Seu nome"
-                v-model="dev.name">
+                v-model.trim="dev.name">
             </div>
 
             <div class="form-group">
@@ -34,7 +34,9 @@
                 type="email"
                 class="form-control"
                 placeholder="Seu email"
-                v-model="dev.email">
+                v-model.lazy.trim="dev.email">
+                <!-- o modificador lazy tem o comportamento de change. Ou seja, só quando tirar o foto do input que o valor será atribuído à propriedade -->
+                <!-- podemos também encadear os modificadores, como é feito acima com lazy e trim -->
             </div>
 
             <div class="form-group">
@@ -43,7 +45,7 @@
                 type="number"
                 class="form-control"
                 placeholder="Sua idade"
-                v-model="dev.age">
+                v-model.number="dev.age">
             </div>
 
             <div class="form-group">
