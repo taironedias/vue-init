@@ -21,17 +21,29 @@
 
             <div class="form-group">
               <label>Nome:</label>
-              <input type="text" class="form-control" placeholder="Seu nome">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Seu nome"
+                v-model="dev.name">
             </div>
 
             <div class="form-group">
               <label>Endereço de email:</label>
-              <input type="email" class="form-control" placeholder="Seu email">
+              <input
+                type="email"
+                class="form-control"
+                placeholder="Seu email"
+                v-model="dev.email">
             </div>
 
             <div class="form-group">
               <label>Idade:</label>
-              <input type="number" class="form-control" placeholder="Sua idade">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Sua idade"
+                v-model="dev.age">
             </div>
 
             <div class="form-group">
@@ -114,9 +126,9 @@
             <div class="card-header">Dados</div>
 
             <ul class="list-group list-group-flush">
-              <li class="list-group-item"><strong>Nome:</strong></li>
-              <li class="list-group-item"><strong>Email:</strong> </li>
-              <li class="list-group-item"><strong>Idade:</strong></li>
+              <li class="list-group-item"><strong>Nome:</strong> {{dev.name}}</li>
+              <li class="list-group-item"><strong>Email:</strong>  {{dev.email}}</li>
+              <li class="list-group-item"><strong>Idade:</strong> {{dev.age}}</li>
               <li class="list-group-item"><strong>Gênero:</strong> </li>
               <li class="list-group-item"><strong>Ocupação:</strong> </li>
               <li class="list-group-item"><strong>Tecnologias:</strong> </li>
@@ -127,7 +139,7 @@
             <div class="card-header">Model</div>
 
             <div class="card-body">
-              <pre><code>{{ {'nome': 'Plínio Naves'} }}</code></pre>
+              <pre><code>{{  dev }}</code></pre>
             </div>
 
           </div>
@@ -141,6 +153,19 @@
   </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      dev: {
+        name: '',
+        email: '',
+        age: 0
+      }
+    }
+  }
+}
+</script>
 
 <style scoped>
   .btn {
