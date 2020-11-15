@@ -18,14 +18,10 @@ export default {
         value: [Number, String],
         inputClass: [String, Object, Array]
     },
-    data() {
-        return {
-            amountCurrent: this.value || this.$attrs.min
-        }
-    },
     computed: {
         customLabel() {
-            let amountFormatter = parseFloat(this.amountCurrent).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+            let amountCurrent = this.value || this.$attrs.min
+            let amountFormatter = parseFloat(amountCurrent).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
             return `${this.label} (${amountFormatter})`
         }
     },
@@ -33,7 +29,6 @@ export default {
         updateAmount(event) {
             const amount = event.target.value;
             this.$emit('input', amount)
-            this.amountCurrent = amount
         }
     }
 }

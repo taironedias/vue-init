@@ -245,7 +245,7 @@ export default {
         stacks: [],
         bio: `"Everybody in this country should learn how to program a computer...\nbecause it teaches you how to think!"\n(Steve Jobs)
         `,
-        salary: 1000,
+        salary: 2000,
         newsletter: 'Sim'
       },
       occupations: [
