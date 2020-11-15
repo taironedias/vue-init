@@ -120,7 +120,9 @@
                 <input
                   type="checkbox"
                   class="form-check-input"
-                  v-model="dev.newsletter">
+                  v-model="dev.newsletter"
+                  :true-value="'Sim'"
+                  :false-value="'Não'">
                 <label class="form-check-label">Receber notificações por email</label>
               </div>
 
@@ -156,7 +158,7 @@
                 <!-- Porém, caso queira aplicar a quebras de linhas sem utilizar essa estilização do Bootstrap segue a estilização abaixo: -->
                 <!-- <div style="white-space: pre;">{{ dev.bio }}</div> -->
               </li>
-              <li class="list-group-item"><strong>Receber notificações?</strong> {{ dev.newsletter ? 'Sim' : 'Não' }} </li>
+              <li class="list-group-item"><strong>Receber notificações?</strong> {{ dev.newsletter }} </li>
             </ul>
 
             <div class="card-header">Model</div>
@@ -186,7 +188,7 @@ export default {
         age: 0,
         genre: 'Masculino',
         bio: 'Sou um dev!',
-        newsletter: true
+        newsletter: 'Sim'
       }
     }
   }
