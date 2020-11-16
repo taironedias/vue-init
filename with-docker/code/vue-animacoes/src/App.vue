@@ -11,7 +11,7 @@
         <div class="container">
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
-            <transition>
+            <transition name="fade">
                 <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
             </transition>
         </div>
@@ -31,24 +31,24 @@ export default {
 
 <style scoped>
     /* entrada da transição */
-    .v-enter {
+    .fade-enter {
         opacity: 0;
     }
-    .v-enter-active {
+    .fade-enter-active {
         transition: opacity 1s;
     }
-    .v-enter-to {
+    .fade-enter-to {
         opacity: 1;
     }
 
     /* saída da transição */
-    .v-leave {
+    .fade-leave {
         opacity: 1;
     }
-    .v-leave-active {
+    .fade-leave-active {
         transition: opacity 500ms;
     }
-    .v-leave-to {
+    .fade-leave-to {
         opacity: 0;
     }
 </style>
