@@ -11,7 +11,7 @@
         <div class="container">
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
-            <transition name="fade">
+            <transition name="zoom">
                 <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
             </transition>
         </div>
@@ -30,6 +30,7 @@ export default {
 </script>
 
 <style scoped>
+    /* utilizando efeito de fade in e fade out */
     .fade-enter, .fade-leave-to {
         opacity: 0;
     }
@@ -41,5 +42,16 @@ export default {
     }
     .fade-leave-active {
         transition: opacity 500ms;
+    }
+
+    /* utilizando o efeito de zoom */
+    .zoom-enter, .zoom-leave-to {
+        transform: scale(0);
+    }
+    .zoom-enter-active, .zoom-leave-active {
+        transition: transform 500ms;
+    }
+    .zoom-enter-to, .zoom-leave {
+        transform: scale(1)
     }
 </style>
