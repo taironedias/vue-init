@@ -56,23 +56,19 @@ export default {
     }
 
     /* utilizando o efeito de slide */
-    .slide-enter {
-
+    .slide-enter, .slide-leave-to {
+        opacity: 0;
     }
     .slide-enter-active {
         animation: slideAnimations 700ms;
+        transition: opacity 700ms;
     }
-    .slide-enter-to {
-
-    }
-    .slide-leave {
-
+    .slide-enter-to, .slide-leave {
+        opacity: 1;
     }
     .slide-leave-active {
         animation: slideAnimations 700ms reverse;
-    }
-    .slide-leave-to {
-
+        transition: opacity 700ms;
     }
     @keyframes slideAnimations {
         0% {
