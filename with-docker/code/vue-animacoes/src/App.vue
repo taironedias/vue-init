@@ -30,25 +30,16 @@ export default {
 </script>
 
 <style scoped>
-    /* entrada da transição */
-    .fade-enter {
+    .fade-enter, .fade-leave-to {
         opacity: 0;
     }
     .fade-enter-active {
         transition: opacity 1s;
     }
-    .fade-enter-to {
-        opacity: 1;
-    }
-
-    /* saída da transição */
-    .fade-leave {
+    .fade-enter-to, .fade-leave {
         opacity: 1;
     }
     .fade-leave-active {
         transition: opacity 500ms;
-    }
-    .fade-leave-to {
-        opacity: 0;
     }
 </style>
