@@ -11,7 +11,9 @@
         <div class="container">
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
-            <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
+            <transition>
+                <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
+            </transition>
         </div>
 
     </div>
@@ -26,3 +28,27 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+    /* entrada da transição */
+    .v-enter {
+
+    }
+    .v-enter-active {
+        
+    }
+    .v-enter-to {
+
+    }
+
+    /* saída da transição */
+    .v-leave {
+        
+    }
+    .v-leave-active {
+        
+    }
+    .v-leave-to {
+
+    }
+</style>
