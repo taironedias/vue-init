@@ -32,23 +32,23 @@ export default {
 <style scoped>
     /* entrada da transição */
     .v-enter {
-
+        opacity: 0;
     }
     .v-enter-active {
-        
+        transition: opacity 1s;
     }
     .v-enter-to {
-
+        opacity: 1;
     }
 
     /* saída da transição */
     .v-leave {
-        
+        opacity: 1;
     }
     .v-leave-active {
-        
+        transition: opacity 500ms;
     }
     .v-leave-to {
-
+        opacity: 0;
     }
 </style>
