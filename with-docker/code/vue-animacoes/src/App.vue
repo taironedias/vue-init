@@ -20,7 +20,10 @@
                 @beforeLeave="beforeLeave"
                 @leave="leave"
                 @afterLeave="afterLeave"
-                @leave-cancelled="enterCancelled">
+                @leave-cancelled="enterCancelled"
+                
+                :css="false">
+                <!-- com :css="false" indicamos ao Vue.js para pular a verificação de animações do CSS -->
                 <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
             </transition>
         </div>
