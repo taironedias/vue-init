@@ -1,7 +1,7 @@
 {
   "useTaobaoRegistry": false,
-  "latestVersion": "4.5.8",
-  "lastChecked": 1604344230825,
+  "latestVersion": "4.5.9",
+  "lastChecked": 1605651490642,
   "presets": {
     "vue-default-preset": {
       "useConfigFiles": false,

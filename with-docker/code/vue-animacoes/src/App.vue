@@ -11,7 +11,10 @@
         <div class="container">
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
-            <transition name="slide" type="animation">
+            <!-- Tanto o tempo de entrada quanto de saída será de 5s -->
+            <!-- <transition name="slide" type="animation" :duration="5000"> -->
+            <!-- Especificando cada tempo -->
+            <transition name="slide" type="animation" :duration="{ enter: 9000, leave: 5000 }">
                 <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
             </transition>
         </div>
