@@ -12,6 +12,8 @@
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
             <transition
+                appear
+
                 @beforeEnter="beforeEnter"
                 @enter="enter"
                 @afterEnter="afterEnter"
