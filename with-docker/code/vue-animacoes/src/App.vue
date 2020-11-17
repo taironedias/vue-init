@@ -11,7 +11,14 @@
         <div class="container">
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
-            <transition name="slide" type="animation">
+            <!-- Biblioteca de animações: https://animate.style/ -->
+            <transition
+                enter-class=""
+                enter-active-class="animate__animated animate__backInLeft"
+                enter-to-class=""
+                leave-class=""
+                leave-active-class="animate__animated animate__backOutDown"
+                leave-to-class="">
                 <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
             </transition>
         </div>
@@ -28,6 +35,12 @@ export default {
     }
 }
 </script>
+
+<style>
+    body {
+        overflow: hidden;
+    }
+</style>
 
 <style scoped>
     /* utilizando efeito de fade in e fade out */
