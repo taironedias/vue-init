@@ -11,7 +11,7 @@
         <div class="container">
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
-            <transition name="slide">
+            <transition name="slide" type="animation">
                 <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
             </transition>
         </div>
@@ -68,7 +68,7 @@ export default {
     }
     .slide-leave-active {
         animation: slideAnimations 700ms reverse;
-        transition: opacity 700ms;
+        transition: opacity 2s;
     }
     @keyframes slideAnimations {
         0% {
