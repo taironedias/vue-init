@@ -11,10 +11,7 @@
         <div class="container">
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
-            <!-- Tanto o tempo de entrada quanto de saída será de 5s -->
-            <!-- <transition name="slide" type="animation" :duration="5000"> -->
-            <!-- Especificando cada tempo -->
-            <transition name="slide" type="animation" :duration="{ enter: 9000, leave: 5000 }">
+            <transition name="slide" type="animation">
                 <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
             </transition>
         </div>
@@ -63,8 +60,9 @@ export default {
         opacity: 0;
     }
     .slide-enter-active {
-        animation: slideAnimations 700ms;
-        transition: opacity 700ms;
+        /* Site onde montei e peguei a curva de animação: https://cubic-bezier.com/#.88,.61,1,.23 */
+        animation: slideAnimations 700ms cubic-bezier(.88,.61,1,.23);
+        transition: opacity 700ms cubic-bezier(.88,.61,1,.23);
     }
     .slide-enter-to, .slide-leave {
         opacity: 1;
