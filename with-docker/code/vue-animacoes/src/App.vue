@@ -40,11 +40,23 @@ export default {
     },
     methods: {
         beforeEnter(el) {
-            console.log('beforeEnter', el);
+            console.log('beforeEnter');
+            el.style.opacity = 0
         },
         enter(el, done) {
-            console.log('enter', el);
-            done();
+            console.log('enter');
+
+            let cont = 0
+            const interval = setInterval(() => {
+                el.style.opacity = parseFloat(el.style.opacity) + 0.1
+                cont++
+
+                if (cont > 10) {
+                    clearInterval(interval)
+                    done()
+                }
+
+            }, 150)
         },
         afterEnter(el) {
             console.log('afterEnter', el);
@@ -54,17 +66,32 @@ export default {
         },
 
         beforeLeave(el) {
-            console.log('beforeLeave', el);
+            console.log('beforeLeave');
+            el.style.transition = 'width 0.5s'
+            el.style.overflow = 'hidden'
+            el.style.whiteSpace = 'nowrap'
         },
         leave(el, done) {
-            console.log('leave', el);
-            done();
+            console.log('leave');
+            let cont = 0
+            const lenght = el.offsetWidth
+
+            const interval = setInterval(() => {
+                el.style.width = (lenght * (1 - (cont / 10))) + 'px'
+                cont++
+
+                if (cont > 10) {
+                    clearInterval(interval)
+                    done()
+                }
+            }, 150)
         },
         afterLeave(el) {
             console.log('afterLeave', el);
         },
         leaveCancelled(el) {
-            console.log('', el);
+            console.log('leaveCancelled', el);
+            console.log('O leaveCancelled só funciona com a diretiva v-show');
         }
     }
 }
