@@ -11,14 +11,16 @@
         <div class="container">
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
-            <!-- Biblioteca de animações: https://animate.style/ -->
             <transition
-                enter-class=""
-                enter-active-class="animate__animated animate__backInLeft"
-                enter-to-class=""
-                leave-class=""
-                leave-active-class="animate__animated animate__backOutDown"
-                leave-to-class="">
+                @beforeEnter="beforeEnter"
+                @enter="enter"
+                @afterEnter="afterEnter"
+                @enter-cancelled="enterCancelled"
+                
+                @beforeLeave="beforeLeave"
+                @leave="leave"
+                @afterLeave="afterLeave"
+                @leave-cancelled="enterCancelled">
                 <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
             </transition>
         </div>
@@ -31,6 +33,35 @@ export default {
     data() {
         return {
             mostrar: true
+        }
+    },
+    methods: {
+        beforeEnter(el) {
+            console.log('beforeEnter', el);
+        },
+        enter(el, done) {
+            console.log('enter', el);
+            done();
+        },
+        afterEnter(el) {
+            console.log('afterEnter', el);
+        },
+        enterCancelled(el) {
+            console.log('enterCancelled', el);
+        },
+
+        beforeLeave(el) {
+            console.log('beforeLeave', el);
+        },
+        leave(el, done) {
+            console.log('leave', el);
+            done();
+        },
+        afterLeave(el) {
+            console.log('afterLeave', el);
+        },
+        leaveCancelled(el) {
+            console.log('', el);
         }
     }
 }
