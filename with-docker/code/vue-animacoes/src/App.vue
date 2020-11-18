@@ -9,26 +9,18 @@
         </div>
 
         <div class="container">
+
+            <div class="form-group">
+                <select class="form-control" v-model="animacaoSelecionada">
+                    <option value="fade">Fade</option>
+                    <option value="zoom">Zoom</option>
+                    <option value="slide">Slide</option>
+                </select>
+            </div>
+
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
-            <!-- Biblioteca de animações: https://animate.style/ -->
-            <transition
-                appear
-                appear-class=""
-                appear-active-class="animate__animated animate__bounceIn"
-                appear-to-class=""
-
-                @before-appear="beforeAppear"
-                @appear="appear"
-                @after-appear="afterAppear"
-                @appear-cancelled="appearCancelled"
-
-                enter-class=""
-                enter-active-class="animate__animated animate__backInLeft"
-                enter-to-class=""
-                leave-class=""
-                leave-active-class="animate__animated animate__backOutDown"
-                leave-to-class="">
+            <transition :name="animacaoSelecionada">
                 <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
             </transition>
         </div>
@@ -40,23 +32,9 @@
 export default {
     data() {
         return {
-            mostrar: true
+            mostrar: true,
+            animacaoSelecionada: 'fade'
         }
-    },
-    methods: {
-        beforeAppear(el) {
-            console.log('beforeAppear', el);
-        },
-        appear(el, done) {
-            console.log('appear', el);
-            setTimeout(done, 1000);
-        },
-        afterAppear(el) {
-            console.log('afterAppear', el);
-        },
-        appearCancelled(el) {
-            console.log('appearCancelled', el);
-        },
     }
 }
 </script>
@@ -107,7 +85,7 @@ export default {
     }
     .slide-leave-active {
         animation: slideAnimations 700ms reverse;
-        transition: opacity 2s;
+        transition: opacity 700ms;
     }
     @keyframes slideAnimations {
         0% {
