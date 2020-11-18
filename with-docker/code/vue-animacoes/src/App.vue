@@ -21,7 +21,12 @@
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
             <transition :name="animacaoSelecionada">
-                <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
+                <!-- Alternando multiplos elementos distintos dentro da mesmo transiction, deve-se utilizar v-if, v-else-if ou v-else -->
+                <!-- <div class="alert alert-info" v-if="mostrar">Animações em Vue.js (alert-info)</div> -->
+                <!-- <p class="alert alert-success" v-else>Animações em Vue.js (alert-success)</p> -->
+                <!-- No caso, acima os elementos são distintos (div e p), porém caso os elementos sejam iguais é necessários especificar a key para cada elemtnos, pois por questões de otimização o Vue só substitui o conteúdo e por isso a animação não é realizada -->
+                <div class="alert alert-info" v-if="mostrar" key="info">Animações em Vue.js (alert-info)</div>
+                <div class="alert alert-success" v-else key="success">Animações em Vue.js (alert-success)</div>
             </transition>
         </div>
 
