@@ -11,21 +11,19 @@
         <div class="container">
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
+            <!-- Biblioteca de animações: https://animate.style/ -->
             <transition
                 appear
+                appear-class=""
+                appear-active-class="animate__animated animate__bounceIn"
+                appear-to-class=""
 
-                @beforeEnter="beforeEnter"
-                @enter="enter"
-                @afterEnter="afterEnter"
-                @enter-cancelled="enterCancelled"
-                
-                @beforeLeave="beforeLeave"
-                @leave="leave"
-                @afterLeave="afterLeave"
-                @leave-cancelled="enterCancelled"
-                
-                :css="false">
-                <!-- com :css="false" indicamos ao Vue.js para pular a verificação de animações do CSS -->
+                enter-class=""
+                enter-active-class="animate__animated animate__backInLeft"
+                enter-to-class=""
+                leave-class=""
+                leave-active-class="animate__animated animate__backOutDown"
+                leave-to-class="">
                 <div class="alert alert-primary" v-if="mostrar">Animações em Vue.js</div>
             </transition>
         </div>
@@ -38,62 +36,6 @@ export default {
     data() {
         return {
             mostrar: true
-        }
-    },
-    methods: {
-        beforeEnter(el) {
-            console.log('beforeEnter');
-            el.style.opacity = 0
-        },
-        enter(el, done) {
-            console.log('enter');
-
-            let cont = 0
-            const interval = setInterval(() => {
-                el.style.opacity = parseFloat(el.style.opacity) + 0.1
-                cont++
-
-                if (cont > 10) {
-                    clearInterval(interval)
-                    done()
-                }
-
-            }, 150)
-        },
-        afterEnter(el) {
-            console.log('afterEnter', el);
-        },
-        enterCancelled(el) {
-            console.log('enterCancelled', el);
-        },
-
-        beforeLeave(el) {
-            console.log('beforeLeave');
-            el.style.transition = 'width 0.5s'
-            el.style.overflow = 'hidden'
-            el.style.whiteSpace = 'nowrap'
-        },
-        leave(el, done) {
-            console.log('leave');
-            let cont = 0
-            const lenght = el.offsetWidth
-
-            const interval = setInterval(() => {
-                el.style.width = (lenght * (1 - (cont / 10))) + 'px'
-                cont++
-
-                if (cont > 10) {
-                    clearInterval(interval)
-                    done()
-                }
-            }, 150)
-        },
-        afterLeave(el) {
-            console.log('afterLeave', el);
-        },
-        leaveCancelled(el) {
-            console.log('leaveCancelled', el);
-            console.log('O leaveCancelled só funciona com a diretiva v-show');
         }
     }
 }
