@@ -18,6 +18,11 @@
                 appear-active-class="animate__animated animate__bounceIn"
                 appear-to-class=""
 
+                @before-appear="beforeAppear"
+                @appear="appear"
+                @after-appear="afterAppear"
+                @appear-cancelled="appearCancelled"
+
                 enter-class=""
                 enter-active-class="animate__animated animate__backInLeft"
                 enter-to-class=""
@@ -37,6 +42,21 @@ export default {
         return {
             mostrar: true
         }
+    },
+    methods: {
+        beforeAppear(el) {
+            console.log('beforeAppear', el);
+        },
+        appear(el, done) {
+            console.log('appear', el);
+            setTimeout(done, 1000);
+        },
+        afterAppear(el) {
+            console.log('afterAppear', el);
+        },
+        appearCancelled(el) {
+            console.log('appearCancelled', el);
+        },
     }
 }
 </script>
