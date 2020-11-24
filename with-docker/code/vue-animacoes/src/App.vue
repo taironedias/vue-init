@@ -11,6 +11,7 @@
         <div class="container">
 
             <div class="form-group">
+                <label>Animações</label>
                 <select class="form-control" v-model="animacaoSelecionada">
                     <option value="fade">Fade</option>
                     <option value="zoom">Zoom</option>
@@ -18,16 +19,19 @@
                 </select>
             </div>
 
-            <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
+            <div class="form-group">
+                <label>Alertas</label>
+                <select class="form-control" v-model="alertaAtual">
+                    <option value="info">Informação</option>
+                    <option value="warning">Alerta</option>
+                    <option value="success">Sucesso</option>
+                </select>
+            </div>
 
-            <!-- a prop mode indica que a animação do elemento que está no DOM será toda executada para depois o elemento de entrada ser animado -->
+            <!-- <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div> -->
+
             <transition :name="animacaoSelecionada" mode="out-in">
-                <!-- Alternando multiplos elementos distintos dentro da mesmo transiction, deve-se utilizar v-if, v-else-if ou v-else -->
-                <!-- <div class="alert alert-info" v-if="mostrar">Animações em Vue.js (alert-info)</div> -->
-                <!-- <p class="alert alert-success" v-else>Animações em Vue.js (alert-success)</p> -->
-                <!-- No caso, acima os elementos são distintos (div e p), porém caso os elementos sejam iguais é necessários especificar a key para cada elemtnos, pois por questões de otimização o Vue só substitui o conteúdo e por isso a animação não é realizada -->
-                <div class="alert alert-info" v-if="mostrar" key="info">Animações em Vue.js (alert-info)</div>
-                <div class="alert alert-success" v-else key="success">Animações em Vue.js (alert-success)</div>
+                <div :class="alertaClass" :key="alertaAtual">Animações em Vue.js</div>
             </transition>
         </div>
 
@@ -39,7 +43,16 @@ export default {
     data() {
         return {
             mostrar: true,
-            animacaoSelecionada: 'fade'
+            animacaoSelecionada: 'fade',
+            alertaAtual: 'info'
+        }
+    },
+    computed: {
+        alertaClass() {
+            return {
+                alert : true,
+                [`alert-${this.alertaAtual}`] : true
+            }
         }
     }
 }
