@@ -20,7 +20,8 @@
 
             <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div>
 
-            <transition :name="animacaoSelecionada">
+            <!-- a prop mode indica que a animação do elemento que está no DOM será toda executada para depois o elemento de entrada ser animado -->
+            <transition :name="animacaoSelecionada" mode="out-in">
                 <!-- Alternando multiplos elementos distintos dentro da mesmo transiction, deve-se utilizar v-if, v-else-if ou v-else -->
                 <!-- <div class="alert alert-info" v-if="mostrar">Animações em Vue.js (alert-info)</div> -->
                 <!-- <p class="alert alert-success" v-else>Animações em Vue.js (alert-success)</p> -->
