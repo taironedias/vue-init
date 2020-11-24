@@ -68,7 +68,8 @@ export default {
         opacity: 0;
         transform: translateX(-70px);
     }
-    .list-enter-active, .list-leave-active {
+    /* as classe s.list-move aplicada para mudança de posição de elementos dentro do transition-group */
+    .list-enter-active, .list-leave-active, .list-move {
         transition: all 800ms;
     }
 </style>
