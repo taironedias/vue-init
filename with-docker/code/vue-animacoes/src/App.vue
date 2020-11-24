@@ -20,18 +20,17 @@
             </div>
 
             <div class="form-group">
-                <label>Alertas</label>
-                <select class="form-control" v-model="alertaAtual">
-                    <option value="info">Informação</option>
-                    <option value="warning">Alerta</option>
-                    <option value="success">Sucesso</option>
+                <label>Component</label>
+                <select class="form-control" v-model="componentSelecionado">
+                    <option value="AppHome">Home</option>
+                    <option value="AppSobre">Sobre</option>
                 </select>
             </div>
 
             <!-- <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div> -->
 
             <transition :name="animacaoSelecionada" mode="out-in">
-                <div :class="alertaClass" :key="alertaAtual">Animações em Vue.js</div>
+                <component :is="componentSelecionado"></component>
             </transition>
         </div>
 
@@ -40,11 +39,16 @@
 
 <script>
 export default {
+    components: {
+        AppHome : () => import('./components/Home'),
+        AppSobre : () => import('./components/Sobre')
+    },
     data() {
         return {
             mostrar: true,
             animacaoSelecionada: 'fade',
-            alertaAtual: 'info'
+            alertaAtual: 'info',
+            componentSelecionado: 'AppHome'
         }
     },
     computed: {
