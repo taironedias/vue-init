@@ -9,29 +9,26 @@
         </div>
 
         <div class="container">
+            <h3 class="font-weight-light">Tecnologias</h3>
 
             <div class="form-group">
-                <label>Animações</label>
-                <select class="form-control" v-model="animacaoSelecionada">
-                    <option value="fade">Fade</option>
-                    <option value="zoom">Zoom</option>
-                    <option value="slide">Slide</option>
-                </select>
+                <input type="text" class="form-control"
+                placeholder="Insira um novo item e pressione Enter"
+                @keyup.enter="adicionar"
+                ref="input">
             </div>
 
-            <div class="form-group">
-                <label>Component</label>
-                <select class="form-control" v-model="componentSelecionado">
-                    <option value="AppHome">Home</option>
-                    <option value="AppSobre">Sobre</option>
-                </select>
-            </div>
-
-            <!-- <div class="btn btn-primary mb-3" @click="mostrar = !mostrar">Mostrar</div> -->
-
-            <transition :name="animacaoSelecionada" mode="out-in">
-                <component :is="componentSelecionado"></component>
-            </transition>
+            <transition-group tag="ul" class="list-group">
+                <li class="list-group-item"
+                    v-for="(tecnologia, index) in tecnologias"
+                    :key="tecnologia">
+                        <span>{{ tecnologia }}</span>
+                        <button class="btn btn-danger btn-sm float-right"
+                            @click="remover(index)">
+                                X
+                        </button>
+                </li>
+            </transition-group>
         </div>
 
     </div>
@@ -39,83 +36,33 @@
 
 <script>
 export default {
-    components: {
-        AppHome : () => import('./components/Home'),
-        AppSobre : () => import('./components/Sobre')
-    },
     data() {
         return {
-            mostrar: true,
-            animacaoSelecionada: 'fade',
-            alertaAtual: 'info',
-            componentSelecionado: 'AppHome'
+            tecnologias: [
+                'JavaScript',
+                'Vue JS',
+                'Vuex',
+                'Vue Router'
+            ]
         }
     },
-    computed: {
-        alertaClass() {
-            return {
-                alert : true,
-                [`alert-${this.alertaAtual}`] : true
+    methods: {
+        adicionar(event) {
+            const novoIten = event.target.value;
+
+            if (novoIten) {
+                const index = Math.floor(Math.random() * this.tecnologias.length)
+                this.tecnologias.splice(index, 0, novoIten)
+                this.$refs.input.value = ''
             }
+        },
+        remover(index) {
+            this.tecnologias.splice(index, 1)
         }
     }
 }
 </script>
 
-<style>
-    body {
-        overflow: hidden;
-    }
-</style>
-
 <style scoped>
-    /* utilizando efeito de fade in e fade out */
-    .fade-enter, .fade-leave-to {
-        opacity: 0;
-    }
-    .fade-enter-active {
-        transition: opacity 1s;
-    }
-    .fade-enter-to, .fade-leave {
-        opacity: 1;
-    }
-    .fade-leave-active {
-        transition: opacity 500ms;
-    }
-
-    /* utilizando o efeito de zoom */
-    .zoom-enter, .zoom-leave-to {
-        transform: scale(0);
-    }
-    .zoom-enter-active, .zoom-leave-active {
-        transition: transform 500ms;
-    }
-    .zoom-enter-to, .zoom-leave {
-        transform: scale(1)
-    }
-
-    /* utilizando o efeito de slide */
-    .slide-enter, .slide-leave-to {
-        opacity: 0;
-    }
-    .slide-enter-active {
-        /* Site onde montei e peguei a curva de animação: https://cubic-bezier.com/#.88,.61,1,.23 */
-        animation: slideAnimations 700ms cubic-bezier(.88,.61,1,.23);
-        transition: opacity 700ms cubic-bezier(.88,.61,1,.23);
-    }
-    .slide-enter-to, .slide-leave {
-        opacity: 1;
-    }
-    .slide-leave-active {
-        animation: slideAnimations 700ms reverse;
-        transition: opacity 700ms;
-    }
-    @keyframes slideAnimations {
-        0% {
-            transform: translateX(-100px);
-        }
-        100% {
-            transform: translateX(0px);
-        }
-    }
+    
 </style>
