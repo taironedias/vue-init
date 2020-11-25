@@ -9,86 +9,34 @@
         </div>
 
         <div class="container">
-            <h3 class="font-weight-light">Tecnologias</h3>
+            <h3 class="font-weight-light">Animações de Estado</h3>
 
-            <div class="row">
-                <div class="col-sm-2">
-                    <button class="btn btn-info" @click="embaralhar">Embaralhar</button>
-                </div>
-
-                <div class="col-sm-10">
-                    <div class="form-group">
-                        <input type="text" class="form-control"
-                        placeholder="Insira um novo item e pressione Enter"
-                        @keyup.enter="adicionar"
-                        ref="input">
-                    </div>
-                </div>
+            <div class="form-group">
+                <input class="form-control" v-model="numero" step="50">
             </div>
 
-            <transition-group tag="ul" class="list-group" name="list">
-                <li class="list-group-item"
-                    v-for="(tecnologia, index) in tecnologias"
-                    :key="tecnologia">
-                        <span>{{ tecnologia }}</span>
-                        <button class="btn btn-danger btn-sm float-right"
-                            @click="remover(index)">
-                                X
-                        </button>
-                </li>
-            </transition-group>
+            <div class="alert alert-info">
+                <h3 class="font-weight-light">
+                    <strong>Número: </strong>
+                    <span>{{ numero }}</span>
+                </h3>
+            </div>
+
         </div>
 
     </div>
 </template>
 
 <script>
-
-import { shuffle } from 'lodash';
-
 export default {
     data() {
         return {
-            tecnologias: [
-                'JavaScript',
-                'Vue JS',
-                'Vuex',
-                'Vue Router'
-            ]
-        }
-    },
-    methods: {
-        adicionar(event) {
-            const novoIten = event.target.value;
-
-            if (novoIten) {
-                const index = Math.floor(Math.random() * this.tecnologias.length)
-                this.tecnologias.splice(index, 0, novoIten)
-                this.$refs.input.value = ''
-            }
-        },
-        remover(index) {
-            this.tecnologias.splice(index, 1)
-        },
-        embaralhar() {
-            this.tecnologias = shuffle(this.tecnologias)
+            numero: 0
         }
     }
 }
 </script>
 
 <style scoped>
-    .list-enter, .list-leave-to {
-        opacity: 0;
-        transform: translateX(-70px);
-    }
-    /* a classe .list-move aplica animação para mudança de posição de elementos dentro do transition-group */
-    .list-enter-active, .list-leave-active, .list-move {
-        transition: all 800ms;
-    }
-    /* permite aplicar animação de saída de elemento no transition-group */
-    .list-leave-active {
-        position: absolute;
-        width: calc(100% - 200px); /* é necessário por conta do Bootstrap que define que todos os elementos contém um position: relative */
-    }
+    
 </style>
