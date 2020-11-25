@@ -68,8 +68,13 @@ export default {
         opacity: 0;
         transform: translateX(-70px);
     }
-    /* as classe s.list-move aplicada para mudança de posição de elementos dentro do transition-group */
+    /* a classe .list-move aplica animação para mudança de posição de elementos dentro do transition-group */
     .list-enter-active, .list-leave-active, .list-move {
         transition: all 800ms;
+    }
+    /* permite aplicar animação de saída de elemento no transition-group */
+    .list-leave-active {
+        position: absolute;
+        width: calc(100% - 200px); /* é necessário por conta do Bootstrap que define que todos os elementos contém um position: relative */
     }
 </style>
