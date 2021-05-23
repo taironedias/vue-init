@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import Contatos from './views/contatos/Contatos.vue'
+import ContatoDetalhes from './views/contatos/ContatoDetalhes.vue'
 import Home from './views/Home.vue'
 
 Vue.use(VueRouter)
@@ -11,6 +12,7 @@ export default new VueRouter({
   linkExactActiveClass: 'active', // adiciona class bootstrap para destacar o elemento a qual foi clicado para a rota. Vale ressaltar que o Vue possue sua própria class que é 'router-link-active', essa que foi utilizado é a do bootstrap
   routes: [
     { path: '/contatos', component: Contatos }, // meu-dominio.com/contatos
+    { path: '/contatos/:id', component: ContatoDetalhes }, // meu-dominio.com/contatos/1
     { path: '/', component: Home } // meu-dominio.com/
   ]
 })
