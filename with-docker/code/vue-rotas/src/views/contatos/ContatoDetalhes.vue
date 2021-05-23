@@ -9,10 +9,14 @@ export default {
             id: this.$route.params.id
         }
     },
-    watch: {
+    /*watch: {
         '$route'(to, from) {
             this.id = to.params.id
         }
+    } */
+    beforeRouteUpdate(to, from, next) {
+        this.id = to.params.id
+        next()
     }
 }
 </script>
