@@ -5,6 +5,8 @@ import Contatos from './views/contatos/Contatos.vue'
 import ContatosHome from './views/contatos/ContatosHome.vue'
 import ContatoDetalhes from './views/contatos/ContatoDetalhes.vue'
 import ContatoEditar from './views/contatos/ContatoEditar.vue'
+import Erro404Contatos from './views/contatos/Erro404Contatos.vue'
+import Erro404 from './views/Erro404.vue'
 import Home from './views/Home.vue'
 
 Vue.use(VueRouter)
@@ -37,6 +39,10 @@ export default new VueRouter({
           component: ContatosHome,
           name: 'contact'
         }, // meu-dominio.com/contatos/
+        {
+          path: '*',
+          component: Erro404Contatos
+        } // exibindo uma página específica de 404, caso seja necessário
       ]
     }, // meu-dominio.com/contatos
     { path: '/home', component: Home }, // meu-dominio.com/
@@ -47,6 +53,7 @@ export default new VueRouter({
         // return '/contatos' // podemos retornar apenas a string path
         return { name: 'contact' } // podemos retornar o objeto contendo o name da rota
       }
-    } // segunda forma de redirect
+    }, // segunda forma de redirect
+    { path: '*', component: Erro404 }
   ]
 })
