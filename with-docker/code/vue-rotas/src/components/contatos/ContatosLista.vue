@@ -1,10 +1,19 @@
 <template>
     <div>
         <h3 class="font-weight-light">Contatos</h3>
-        <ul class="list-group" v-if="contatos.length > 0">
+        <div class="form-group">
+            <input
+                type="search"
+                class="form-control"
+                placeholder="Buscar contato"
+                @keyup.enter="buscar"
+                :value="$route.query.busca">
+        </div>
+        <hr/>
+        <ul class="list-group" v-if="contactFilter.length > 0">
             <ContatosListaIten
                 class="list-group-item"
-                v-for="contato in contatos"
+                v-for="contato in contactFilter"
                 :key="contato.id"
                 :contact="contato"
             />
@@ -30,7 +39,23 @@ export default {
             ]
         }
     },
+    computed: {
+        contactFilter() {
+            const value = this.$route.query.busca
+            return !value
+                ? this.contatos
+                : this.contatos.filter(c => c.name.toLowerCase().includes(value.toLowerCase()))
+        }
+    },
     methods: {
+        buscar(event) {
+            this.$router.push({
+                path: '/contatos',
+                query: {
+                    busca: event.target.value
+                }
+            })
+        },
         voltarPagina() {
             this.$router.back()
         }
