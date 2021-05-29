@@ -16,6 +16,8 @@ export default new VueRouter({
     {
       path: '/contatos',
       component: Contatos,
+      // alias: '/meus-contatos', // (primeira forma) ao chamar essa rota o nome continua, porém o que será renderizado será o '/contatos'
+      alias: ['/meus-contatos', '/my-contacts'], // (segunda forma)
       children: [
         {
           path: ':id',
@@ -24,6 +26,7 @@ export default new VueRouter({
         }, // meu-dominio.com/contatos/1
         {
           path: ':id/editar',
+          alias: ':id/update',
           components: {
             default: ContatoEditar,
             'contato-detalhes': ContatoDetalhes
