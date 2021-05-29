@@ -14,10 +14,14 @@ export default new VueRouter({
   linkExactActiveClass: 'active', // adiciona class bootstrap para destacar o elemento a qual foi clicado para a rota. Vale ressaltar que o Vue possue sua própria class que é 'router-link-active', essa que foi utilizado é a do bootstrap
   routes: [
     {
-      path: '/meus-contatos',
+      path: '/contatos',
       component: Contatos,
       children: [
-        { path: ':id', component: ContatoDetalhes, name: 'contato' }, // meu-dominio.com/contatos/1
+        {
+          path: ':id',
+          component: ContatoDetalhes,
+          name: 'contato'
+        }, // meu-dominio.com/contatos/1
         {
           path: ':id/editar',
           components: {
@@ -25,10 +29,21 @@ export default new VueRouter({
             'contato-detalhes': ContatoDetalhes
           }
         }, // meu-dominio.com/contatos/1/editar
-        { path: '', component: ContatosHome }, // meu-dominio.com/contatos/
+        {
+          path: '',
+          component: ContatosHome,
+          name: 'contact'
+        }, // meu-dominio.com/contatos/
       ]
     }, // meu-dominio.com/contatos
-    { path: '/contatos', redirect: 'meus-contatos' },
-    { path: '/', component: Home } // meu-dominio.com/
+    { path: '/home', component: Home }, // meu-dominio.com/
+    // { path: '/', redirect: '/contatos' } // primeira forma de redirect
+    {
+      path: '/',
+      redirect: to => {
+        // return '/contatos' // podemos retornar apenas a string path
+        return { name: 'contact' } // podemos retornar o objeto contendo o name da rota
+      }
+    } // segunda forma de redirect
   ]
 })
