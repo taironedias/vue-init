@@ -26,7 +26,7 @@ export default new VueRouter({
       },
       children: [
         {
-          path: ':id',
+          path: ':id(\\d+)',
           component: ContatoDetalhes,
           name: 'contato',
           props: route => ({
@@ -35,8 +35,8 @@ export default new VueRouter({
           })
         }, // meu-dominio.com/contatos/1
         {
-          path: ':id/editar',
-          alias: ':id/update',
+          path: ':id(\\d+)/editar',
+          alias: ':id(\\d+)/update',
           components: {
             default: ContatoEditar,
             'contato-detalhes': ContatoDetalhes
