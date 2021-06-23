@@ -16,7 +16,7 @@ const extrairParamId = route => ({
   id: +route.params.id // uma outra forma de conversão
 })
 
-export default new VueRouter({
+const router = new VueRouter({
   mode: 'history', // em aplicações publicadas esse modo deve ter tratado no servidor para que sempre retorne o index, e assim o Vue continuar o tratamento das rotas no front-end
   linkExactActiveClass: 'active', // adiciona class bootstrap para destacar o elemento a qual foi clicado para a rota. Vale ressaltar que o Vue possue sua própria class que é 'router-link-active', essa que foi utilizado é a do bootstrap
   routes: [
@@ -73,3 +73,14 @@ export default new VueRouter({
     { path: '*', component: Erro404 }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  console.log('beforeEach')
+  next()
+})
+
+router.afterEach((to, from) => {
+  console.log('afterEach')
+})
+
+export default router
