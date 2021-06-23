@@ -37,7 +37,9 @@ export default new VueRouter({
           props: extrairParamId
         }, // meu-dominio.com/contatos/1
         {
-          path: ':id(\\d+)/editar',
+          path: ':id(\\d+)/editar/:opcional?',     // a interrogação, informa que posso passar ou não apenas um parâmetro
+          // path: ':id(\\d+)/editar/:zeroOuMais*',   // o asterisco, informa que posso ou não passar um ou vários parâmetros separando-os por /
+          // path: ':id(\\d+)/editar/:umOuMais+',     // o sinal de mais, informa que tenho que passar no mínimo um parâmetro
           alias: ':id(\\d+)/update',
           components: {
             default: ContatoEditar,
