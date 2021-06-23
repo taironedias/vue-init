@@ -7,7 +7,7 @@
                 class="form-control"
                 placeholder="Buscar contato"
                 @keyup.enter="buscar"
-                :value="$route.query.busca">
+                :value="busca">
         </div>
         <hr/>
         <ul class="list-group" v-if="contactFilter.length > 0">
@@ -30,6 +30,7 @@ export default {
     components: {
         ContatosListaIten
     },
+    props: ['busca'],
     data() {
         return {
             contatos: [
@@ -41,7 +42,7 @@ export default {
     },
     computed: {
         contactFilter() {
-            const value = this.$route.query.busca
+            const value = this.busca
             return !value
                 ? this.contatos
                 : this.contatos.filter(c => c.name.toLowerCase().includes(value.toLowerCase()))

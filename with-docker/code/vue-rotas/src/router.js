@@ -20,6 +20,10 @@ export default new VueRouter({
       component: Contatos,
       // alias: '/meus-contatos', // (primeira forma) ao chamar essa rota o nome continua, porém o que será renderizado será o '/contatos'
       alias: ['/meus-contatos', '/my-contacts'], // (segunda forma)
+      props: (route) => {
+        const valueSearch = route.query.busca
+        return !!valueSearch ? { 'busca': valueSearch } : {}
+      },
       children: [
         {
           path: ':id',
