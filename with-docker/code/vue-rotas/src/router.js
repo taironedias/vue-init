@@ -52,11 +52,6 @@ const router = new VueRouter({
           },
           beforeEnter(to, from, next) {   // essa sintaxe 'beforeEnter() {}' é a mesma coisa que 'beforeEnter: () => {}'
             console.log('beforeEnter');
-
-            if(to.query.auth === undefined || to.query.auth === 'false') {
-              return next('/contatos')
-            }
-
             next()
           }
         }, // meu-dominio.com/contatos/1/editar
