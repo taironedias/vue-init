@@ -24,7 +24,8 @@ export default new VueRouter({
         {
           path: ':id',
           component: ContatoDetalhes,
-          name: 'contato'
+          name: 'contato',
+          props: true
         }, // meu-dominio.com/contatos/1
         {
           path: ':id/editar',
@@ -32,6 +33,10 @@ export default new VueRouter({
           components: {
             default: ContatoEditar,
             'contato-detalhes': ContatoDetalhes
+          },
+          props: {
+            default: true,
+            'contato-detalhes': true
           }
         }, // meu-dominio.com/contatos/1/editar
         {
