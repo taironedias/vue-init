@@ -52,7 +52,12 @@ const router = new VueRouter({
           },
           beforeEnter(to, from, next) {   // essa sintaxe 'beforeEnter() {}' é a mesma coisa que 'beforeEnter: () => {}'
             console.log('beforeEnter');
-            next()
+            next()                   // continua a navegação
+            // next(true)               // continua a navegação
+            // next(false)              // bloqueia a navegação
+            // next('/home')            // faz um redirecionamento
+            // next({ path: '/home' })  // faz um redirecionamento
+            // next(new Error(`Você não possue permissões suficientes para acessa esse recurso "${to.fullPath}"`))  // dispara um erro que pode ser recuperado pelo router.onError
           }
         }, // meu-dominio.com/contatos/1/editar
         {
@@ -91,6 +96,10 @@ router.beforeResolve((to, from, next) => {
 
 router.afterEach((to, from) => {
   console.log('afterEach')
+})
+
+router.onError(error => {
+  console.log(error);
 })
 
 export default router
