@@ -11,6 +11,11 @@
 
 <script>
 export default {
-    props: ['id']
+    props: {
+        id: {
+            type: Number,
+            require: true
+        }
+    }
 }
 </script>

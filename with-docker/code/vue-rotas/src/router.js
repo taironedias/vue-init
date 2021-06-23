@@ -29,7 +29,10 @@ export default new VueRouter({
           path: ':id',
           component: ContatoDetalhes,
           name: 'contato',
-          props: true
+          props: route => ({
+            // id: parseInt(route.params.id)
+            id: +route.params.id // uma outra forma de conversão
+          })
         }, // meu-dominio.com/contatos/1
         {
           path: ':id/editar',
