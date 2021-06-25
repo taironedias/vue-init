@@ -42,6 +42,7 @@ const router = new VueRouter({
           // path: ':id(\\d+)/editar/:zeroOuMais*',   // o asterisco, informa que posso ou não passar um ou vários parâmetros separando-os por /
           // path: ':id(\\d+)/editar/:umOuMais+',     // o sinal de mais, informa que tenho que passar no mínimo um parâmetro
           alias: ':id(\\d+)/update',
+          meta:{ requiredAuth: true },
           components: {
             default: ContatoEditar,
             'contato-detalhes': ContatoDetalhes
@@ -86,6 +87,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   console.log('beforeEach')
+  console.log('to.meta.requiredAuth :>> ', to.meta.requiredAuth);
   next()
 })
 
