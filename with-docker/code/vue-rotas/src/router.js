@@ -1,16 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Contatos from './views/contatos/Contatos.vue'
-import ContatosHome from './views/contatos/ContatosHome.vue'
-import ContatoDetalhes from './views/contatos/ContatoDetalhes.vue'
-import ContatoEditar from './views/contatos/ContatoEditar.vue'
 import Erro404Contatos from './views/contatos/Erro404Contatos.vue'
 import Erro404 from './views/Erro404.vue'
-import Home from './views/Home.vue'
 import Login from './views/login/Login.vue'
 
 import EventBus from './event-bus'
+
+/* Carregando determinadas sessões/recursos conforme demanda do usuário (lazy loading). Nesse caso, será apenas carregando quando o usuário clicar sobre o recurso a ser acessado. Isso é útil em aplicações de grande porte pois todos os components não são carregados no start da aplicação. Caso, deseja-se carregar k pacotes ao acessar apenas um recurso basta agrupá-los em um único package name através do comentário de bloco webpackChunkName, pois o webpack lê esse comentários e faz o agrupamento */
+const Contatos = () => import(/* webpackChunkName: "contatos" */ './views/contatos/Contatos.vue')
+const ContatosHome = () => import(/* webpackChunkName: "contatos" */ './views/contatos/ContatosHome.vue')
+const ContatoDetalhes = () => import(/* webpackChunkName: "contatos" */ './views/contatos/ContatoDetalhes.vue')
+const ContatoEditar = () => import(/* webpackChunkName: "contatos" */ './views/contatos/ContatoEditar.vue')
+const Home = () => import('./views/Home.vue')
 
 Vue.use(VueRouter)
 
