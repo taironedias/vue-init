@@ -8,6 +8,9 @@ import ContatoEditar from './views/contatos/ContatoEditar.vue'
 import Erro404Contatos from './views/contatos/Erro404Contatos.vue'
 import Erro404 from './views/Erro404.vue'
 import Home from './views/Home.vue'
+import Login from './views/login/Login.vue'
+
+import EventBus from './event-bus'
 
 Vue.use(VueRouter)
 
@@ -73,6 +76,7 @@ const router = new VueRouter({
       ]
     }, // meu-dominio.com/contatos
     { path: '/home', component: Home }, // meu-dominio.com/
+    { path: '/login', component: Login},
     // { path: '/', redirect: '/contatos' } // primeira forma de redirect
     {
       path: '/',
@@ -87,7 +91,19 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   console.log('beforeEach')
-  console.log('to.meta.requiredAuth :>> ', to.meta.requiredAuth);
+  const isAuthenticate = EventBus.authenticated;
+  const routContainsRequiredAuth = to.matched.some(rout => rout.meta.requiredAuth)
+
+  if (routContainsRequiredAuth && !isAuthenticate) {
+    next({
+      path: '/login',
+      query: {
+        redirect: to.fullPath
+      }
+    })
+    return
+  }
+
   next()
 })
 
