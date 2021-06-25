@@ -22,6 +22,40 @@ const extrairParamId = route => ({
 const router = new VueRouter({
   mode: 'history', // em aplicações publicadas esse modo deve ter tratado no servidor para que sempre retorne o index, e assim o Vue continuar o tratamento das rotas no front-end
   linkExactActiveClass: 'active', // adiciona class bootstrap para destacar o elemento a qual foi clicado para a rota. Vale ressaltar que o Vue possue sua própria class que é 'router-link-active', essa que foi utilizado é a do bootstrap
+  scrollBehavior(to, from, savedPosition) {
+    /* FORMA SÍNCRONA */
+    // if (savedPosition) {
+    //   // caso queria manter as posições do browser, quando o usuário clicou em avanças ou voltar
+    //   return savedPosition
+    // }
+
+    // if (to.hash) {
+    //   // caso exista a âncora, é realizado o scroll sobre ela
+    //   return {
+    //     selector: to.hash
+    //   }
+    // }
+
+    // // caso nenhuma das opções acima sejam satisfeitas, é retornado um objeto com as posições iniciais para o scroll
+    // return { x: 0, y: 0 }
+
+    /* FORMA ASSÍNCRONA */
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (savedPosition) {
+          return resolve(savedPosition)
+        }
+
+        if (to.hash) {
+          return resolve({
+            selector: to.hash
+          })
+        }
+
+        resolve({ x: 0, y: 0 })
+      }, 3000);
+    })
+  },
   routes: [
     {
       path: '/contatos',
