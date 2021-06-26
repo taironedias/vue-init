@@ -77,15 +77,29 @@ export default {
     },
     methods: {
         createTask(task) {
-            axios.post(`${config.apiUrl}/tasks`, task)
-                .then(response => {
-                    console.log('POST /tasks :>> ', response);
-                    this.tasks.push(response.data)
-                    this.reset()
-                })
-                .catch(reason => {
-                    console.log('reason :>> ', reason);
-                })
+            // axios.post(`${config.apiUrl}/tasks`, task)
+            //     .then(response => {
+            //         console.log('POST /tasks :>> ', response);
+            //         this.tasks.push(response.data)
+            //         this.reset()
+            //     })
+            //     .catch(reason => {
+            //         console.log('reason :>> ', reason);
+            //     })
+
+            axios.request({
+                method: 'POST',
+                baseURL: config.apiUrl,
+                url: '/tasks',
+                data: task
+            }).then(response => {
+                console.log('POST /tasks :>> ', response);
+                this.tasks.push(response.data)
+                this.reset()
+
+            }).catch(reason => {
+                console.log('reason :>> ', reason);
+            })
         },
         updateTask(task) {
             axios.put(`${config.apiUrl}/tasks/${task.id}`, task)

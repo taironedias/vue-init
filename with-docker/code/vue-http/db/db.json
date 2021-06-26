@@ -29,6 +29,11 @@
       "title": "Aprender Vuetify",
       "done": true,
       "id": 6
+    },
+    {
+      "title": "Aprender Animações",
+      "done": false,
+      "id": 7
     }
   ]
 }
