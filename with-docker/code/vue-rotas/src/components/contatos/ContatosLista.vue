@@ -25,6 +25,7 @@
 
 <script>
 import ContatosListaIten from './ContatosListaIten.vue'
+import EventBus from '@/event-bus'  // o '@' aponta para o diretório 'src', com isso não é necessário ficar voltando níveis
 
 export default {
     components: {
@@ -33,11 +34,7 @@ export default {
     props: ['busca'],
     data() {
         return {
-            contatos: [
-                { id: 1, name: 'Danilo Gentili', email: 'danilo@gentili.com' },
-                { id: 2, name: 'Thiago Ventura', email: 'thiago@ventura.com' },
-                { id: 3, name: 'Rafael Portugal', email: 'rafael@portugal.com' }
-            ]
+            contatos: []
         }
     },
     computed: {
@@ -47,6 +44,9 @@ export default {
                 ? this.contatos
                 : this.contatos.filter(c => c.name.toLowerCase().includes(value.toLowerCase()))
         }
+    },
+    created() {
+        this.contatos = EventBus.contacts
     },
     methods: {
         buscar(event) {
