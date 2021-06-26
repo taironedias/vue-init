@@ -36,9 +36,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '@/axios'
 
-import config from '@/config/config'
 import TarefaSalvar from './TarefaSalvar.vue'
 import TarefasListaIten from './TarefasListaIten.vue'
 
@@ -73,10 +72,10 @@ export default {
         }
     },
     created() {
-        // axios.get(`${config.apiUrl}/endpointNotFound`)   // forçando um Client Error
-        // axios.get(`http://0.0.0.0:3001/tasks`)           // forçando um Server Error
-        // axios.get(`${config.apiUrl}12345/tasks`)         // forçando um erro na montagem da requisição
-        axios.get(`${config.apiUrl}/tasks`)
+        // axios.get('/endpointNotFound')   // forçando um Client Error
+        // axios.get('/tasks', { baseURL: 'http://0.0.0.0:3001' })           // forçando um Server Error
+        // axios.get('12345/tasks')         // forçando um erro na montagem da requisição
+        axios.get('/tasks')
             .then(response => {
                 /* Semelhante ao DONE (SUCCESS) do jQuery */
                 console.log('GET /tasks :>> ', response);
@@ -111,7 +110,7 @@ export default {
     },
     methods: {
         createTask(task) {
-            // axios.post(`${config.apiUrl}/tasks`, task)
+            // axios.post('/tasks', task)
             //     .then(response => {
             //         console.log('POST /tasks :>> ', response);
             //         this.tasks.push(response.data)
@@ -123,7 +122,6 @@ export default {
 
             axios.request({
                 method: 'POST',
-                baseURL: config.apiUrl,
                 url: '/tasks',
                 data: task
             }).then(response => {
@@ -142,7 +140,7 @@ export default {
             })
         },
         updateTask(task) {
-            axios.put(`${config.apiUrl}/tasks/${task.id}`, task)
+            axios.put(`/tasks/${task.id}`, task)
                 .then(response => {
                     console.log(`PUT /tasks/${task.id} :>> `, response)
                     const index = this.tasks.findIndex(t => t.id === response.data.id)
@@ -166,7 +164,7 @@ export default {
                 return
             }
 
-            axios.delete(`${config.apiUrl}/tasks/${task.id}`)
+            axios.delete(`/tasks/${task.id}`)
                 .then(response => {
                     const index = this.tasks.findIndex(t => t.id === response.data.id)
                     this.tasks.splice(index, 1)
