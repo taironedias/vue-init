@@ -18,7 +18,8 @@
                 v-for="task in tasks"
                 :key="task.id"
                 :task="task"
-                @updateAction="selectedTaskForUpdate"/>
+                @updateAction="selectedTaskForUpdate"
+                @deleteAction="deleteTask"/>
         </ul>
 
         <p v-else>Nenhuma tarefa criada</p>
@@ -78,6 +79,22 @@ export default {
                 })
                 .catch(reason => {
                     console.log('reason :>> ', reason)
+                })
+        },
+        deleteTask(task) {
+            const confirm = window.confirm(`Deseja excluir a tarefa "${task.title}"?`)
+
+            if (!confirm) {
+                return
+            }
+
+            axios.delete(`${config.apiUrl}/tasks/${task.id}`)
+                .then(response => {
+                    const index = this.tasks.findIndex(t => t.id === response.data.id)
+                    this.tasks.splice(index, 1)
+                })
+                .catch(reason => {
+                    console.log('reason :>> ', reason);
                 })
         },
         selectedTaskForUpdate(task) {

@@ -11,24 +11,9 @@
       "done": true
     },
     {
-      "id": 3,
       "title": "Aprender Axios",
-      "done": false
-    },
-    {
-      "title": "Aprender Vuex",
       "done": false,
-      "id": 4
-    },
-    {
-      "title": "Aprender Vue Router",
-      "done": true,
-      "id": 5
-    },
-    {
-      "title": "Aprender Vuetify",
-      "done": false,
-      "id": 6
+      "id": 3
     }
   ]
 }
