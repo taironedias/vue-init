@@ -131,8 +131,14 @@ export default {
                 this.tasks.push(response.data)
                 this.reset()
 
-            }).catch(reason => {
-                console.log('reason :>> ', reason);
+            }).catch(error => {
+                if (error.response) {
+                    this.errorMessage = `Servidor retornou um erro: ${error.message} -- ${error.response.statusText}`
+                } else if (error.request) {
+                    this.errorMessage = `Erro ao tentar se comunicar com o servidor: ${error.message}`
+                } else {
+                    this.errorMessage = `Erro na montagem da requisição do axios: ${error.message}`
+                }
             })
         },
         updateTask(task) {
@@ -143,8 +149,14 @@ export default {
                     this.tasks.splice(index, 1, response.data)
                     this.reset()
                 })
-                .catch(reason => {
-                    console.log('reason :>> ', reason)
+                .catch(error => {
+                    if (error.response) {
+                        this.errorMessage = `Servidor retornou um erro: ${error.message} -- ${error.response.statusText}`
+                    } else if (error.request) {
+                        this.errorMessage = `Erro ao tentar se comunicar com o servidor: ${error.message}`
+                    } else {
+                        this.errorMessage = `Erro na montagem da requisição do axios: ${error.message}`
+                    }
                 })
         },
         deleteTask(task) {
@@ -159,8 +171,14 @@ export default {
                     const index = this.tasks.findIndex(t => t.id === response.data.id)
                     this.tasks.splice(index, 1)
                 })
-                .catch(reason => {
-                    console.log('reason :>> ', reason);
+                .catch(error => {
+                    if (error.response) {
+                        this.errorMessage = `Servidor retornou um erro: ${error.message} -- ${error.response.statusText}`
+                    } else if (error.request) {
+                        this.errorMessage = `Erro ao tentar se comunicar com o servidor: ${error.message}`
+                    } else {
+                        this.errorMessage = `Erro na montagem da requisição do axios: ${error.message}`
+                    }
                 })
         },
         showFormCreateTask() {
