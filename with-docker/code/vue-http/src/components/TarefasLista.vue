@@ -13,9 +13,9 @@
                 </button>
             </div>
         </div>
-        <ul class="list-group" v-if="tasks.length > 0">
+        <ul class="list-group" v-if="sortTasks.length > 0">
             <TarefasListaIten
-                v-for="task in tasks"
+                v-for="task in sortTasks"
                 :key="task.id"
                 :task="task"
                 @updateAction="selectedTaskForUpdate"
@@ -49,6 +49,23 @@ export default {
             tasks: [],
             showForm: false,
             selectedTask: undefined
+        }
+    },
+    computed: {
+        sortTasks() {
+            return this.tasks.slice().sort((task1, task2) => {
+                if (task1.done === task2.done) {
+                    /* Realizando uma segunda ordenação, só que agora por ordem alfabética do título */
+                    return task1.title < task2.title
+                        ? -1
+                        : task1.title > task2.title
+                            ? 1
+                            : 0
+                }
+
+                /* Apesar de done ser do tipo Boolean, no JS é possível fazer esse tipo de operação, pois como é tipo primitivo há naturalmente a conversão para inteiros e a operação aritmética é realizada */
+                return task1.done - task2.done
+            })
         }
     },
     created() {

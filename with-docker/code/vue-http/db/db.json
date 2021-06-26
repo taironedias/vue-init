@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "Aprender JavaScript",
-      "done": true
+      "done": false
     },
     {
       "id": 2,
@@ -12,7 +12,7 @@
     },
     {
       "title": "Aprender Axios",
-      "done": false,
+      "done": true,
       "id": 3
     },
     {
@@ -22,12 +22,12 @@
     },
     {
       "title": "Aprender Vuex",
-      "done": true,
+      "done": false,
       "id": 5
     },
     {
       "title": "Aprender Vuetify",
-      "done": false,
+      "done": true,
       "id": 6
     }
   ]
