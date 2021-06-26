@@ -14,6 +14,9 @@
 </template>
 
 <script>
+import axios from 'axios'
+
+import config from '@/config/config'
 import TarefaSalvar from './TarefaSalvar.vue'
 import TarefasListaIten from './TarefasListaIten.vue'
 
@@ -24,12 +27,15 @@ export default {
     },
     data() {
         return {
-            tasks: [
-                { id: 1, title: 'Aprender JavaScript', done: true },
-                { id: 2, title: 'Aprender Vue.js', done: true },
-                { id: 3, title: 'Aprender Axios', done: false }
-            ]
+            tasks: []
         }
+    },
+    created() {
+        axios.get(`${config.apiUrl}/tasks`)
+            .then(response => {
+                console.log('response :>> ', response);
+                this.tasks = response.data
+            })
     }
 }
 </script>
