@@ -17,13 +17,16 @@
             <TarefasListaIten
                 v-for="task in tasks"
                 :key="task.id"
-                :task="task" />
+                :task="task"
+                @updateAction="selectedTaskForUpdate"/>
         </ul>
 
         <p v-else>Nenhuma tarefa criada</p>
         <TarefaSalvar
             v-if="showForm"
-            @create="createTask"/>
+            :task="selectedTask"
+            @create="createTask"
+            @update="updateTask"/>
     </div>
 </template>
 
@@ -42,7 +45,8 @@ export default {
     data() {
         return {
             tasks: [],
-            showForm: false
+            showForm: false,
+            selectedTask: undefined
         }
     },
     created() {
@@ -63,6 +67,13 @@ export default {
                 .catch(reason => {
                     console.log('reason :>> ', reason);
                 })
+        },
+        updateTask(task) {
+            console.log('updateTask :>> ', task)
+        },
+        selectedTaskForUpdate(task) {
+            this.selectedTask = task
+            this.showForm = true
         }
     }
 }

@@ -24,6 +24,11 @@
       "title": "Aprender Vue Router",
       "done": false,
       "id": 5
+    },
+    {
+      "title": "Aprender Vuetify",
+      "done": false,
+      "id": 6
     }
   ]
 }

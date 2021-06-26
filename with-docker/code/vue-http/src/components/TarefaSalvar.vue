@@ -19,8 +19,12 @@
                 <div class="col-sm-2" v-if="task">
                     <div class="form-group">
                         <label for="done">Tarefa concluída?</label>
-                        <button class="btn btn-secondary btn-sm d-block">
-                            <i class="fa fa-check"></i>
+                        <button
+                            type="button"
+                            class="btn btn-sm d-block"
+                            :class="doneBtnClass"
+                            @click="localTask.done = !localTask.done">
+                                <i class="fa fa-check"></i>
                         </button>
                     </div>
                 </div>
@@ -53,11 +57,22 @@ export default {
             return this.task
                 ? 'col-sm-10'
                 : 'col-sm-12'
+        },
+        doneBtnClass() {
+            return this.task && this.localTask.done === true
+                ? 'btn-success'
+                : 'btn-secondary'
+        }
+    },
+    watch: {
+        task(newTask) {
+            this.localTask = Object.assign({}, newTask)
         }
     },
     methods: {
         save() {
-            this.$emit('create', this.localTask)
+            const operation = !this.task ? 'create' : 'update'
+            this.$emit(operation, this.localTask)
             this.localTask = { title: '', done: false }
         }
     }

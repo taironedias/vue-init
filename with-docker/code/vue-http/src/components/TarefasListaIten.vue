@@ -5,8 +5,11 @@
         <button class="btn btn-sm mr-4" :class="cssClasses" :title="titleDoneButton">
             <i class="fa fa-check"></i>
         </button>
-        <button class="btn btn-primary btn-sm mr-1" title="Editar">
-            <i class="fa fa-pencil-alt"></i>
+        <button
+            class="btn btn-primary btn-sm mr-1"
+            title="Editar"
+            @click="$emit('updateAction', task)">
+                <i class="fa fa-pencil-alt"></i>
         </button>
         <button class="btn btn-danger btn-sm" title="Deletar">
             <i class="fa fa-trash"></i>
