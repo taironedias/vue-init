@@ -4,8 +4,7 @@
         <router-link
             :to="{
                 name: 'contato',
-                params: { id : contact.id },
-                hash: '#params'
+                params: { id : contact.id }
             }"
             class="btn btn-info btn-sm float-right">
                 Detalhes
