@@ -7,7 +7,7 @@
             <div class="col-sm-2">
                 <button
                     class="btn btn-primary float-right"
-                    @click="showForm = !showForm">
+                    @click="showFormCreateTask">
                         <i class="fa fa-plus mr-2"></i>
                         <span>Criar</span>
                 </button>
@@ -97,6 +97,14 @@ export default {
                 .catch(reason => {
                     console.log('reason :>> ', reason);
                 })
+        },
+        showFormCreateTask() {
+            if (this.selectedTask) {
+                this.selectedTask = undefined
+                return
+            }
+
+            this.showForm = !this.showForm
         },
         selectedTaskForUpdate(task) {
             this.selectedTask = task
