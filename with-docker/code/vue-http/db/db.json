@@ -22,8 +22,9 @@
     },
     {
       "title": "Aprender Vuex",
-      "done": false,
-      "id": 5
+      "done": true,
+      "id": 5,
+      "curso": "Vue JS"
     },
     {
       "title": "Aprender Vuetify",
