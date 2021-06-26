@@ -57,7 +57,7 @@ export default {
     },
     beforeRouteLeave(to, from, next) {
         console.log('beforeRouteLeave')
-        this.isSubmit
+        !this.isSubmit
             ? next(window.confirm('Deseja realmente sair da edição de contatos?'))
             : next()
     },
