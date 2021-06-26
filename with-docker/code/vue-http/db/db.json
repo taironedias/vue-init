@@ -16,13 +16,13 @@
       "done": false
     },
     {
-      "id": 4,
-      "title": "Aprender vuex",
-      "done": false
+      "title": "Aprender Vuex",
+      "done": false,
+      "id": 4
     },
     {
       "title": "Aprender Vue Router",
-      "done": false,
+      "done": true,
       "id": 5
     },
     {

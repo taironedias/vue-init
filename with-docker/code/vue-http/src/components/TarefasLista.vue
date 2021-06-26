@@ -62,18 +62,31 @@ export default {
                 .then(response => {
                     console.log('POST /tasks :>> ', response);
                     this.tasks.push(response.data)
-                    this.showForm = false
+                    this.reset()
                 })
                 .catch(reason => {
                     console.log('reason :>> ', reason);
                 })
         },
         updateTask(task) {
-            console.log('updateTask :>> ', task)
+            axios.put(`${config.apiUrl}/tasks/${task.id}`, task)
+                .then(response => {
+                    console.log(`PUT /tasks/${task.id} :>> `, response)
+                    const index = this.tasks.findIndex(t => t.id === response.data.id)
+                    this.tasks.splice(index, 1, response.data)
+                    this.reset()
+                })
+                .catch(reason => {
+                    console.log('reason :>> ', reason)
+                })
         },
         selectedTaskForUpdate(task) {
             this.selectedTask = task
             this.showForm = true
+        },
+        reset() {
+            this.selectedTask = undefined
+            this.showForm = false
         }
     }
 }
