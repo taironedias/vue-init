@@ -23,7 +23,10 @@
                 @doneTaskAction="updateTask"/>
         </ul>
 
-        <p v-else>Nenhuma tarefa criada</p>
+        <p v-else-if="!errorMessage">Nenhuma tarefa criada</p>
+
+        <div class="alert alert-danger" v-else>{{ errorMessage }}</div>
+
         <TarefaSalvar
             v-if="showForm"
             :task="selectedTask"
@@ -48,7 +51,8 @@ export default {
         return {
             tasks: [],
             showForm: false,
-            selectedTask: undefined
+            selectedTask: undefined,
+            errorMessage: undefined
         }
     },
     computed: {
@@ -69,10 +73,40 @@ export default {
         }
     },
     created() {
+        // axios.get(`${config.apiUrl}/endpointNotFound`)   // forçando um Client Error
+        // axios.get(`http://0.0.0.0:3001/tasks`)           // forçando um Server Error
+        // axios.get(`${config.apiUrl}12345/tasks`)         // forçando um erro na montagem da requisição
         axios.get(`${config.apiUrl}/tasks`)
             .then(response => {
+                /* Semelhante ao DONE (SUCCESS) do jQuery */
                 console.log('GET /tasks :>> ', response);
                 this.tasks = response.data
+                return 'Valor para o "optionalParams" do always (from then)'
+            }, error => {
+                /* Essa é a primeira forma de capturar o erro; normlamente, é utilizada para caputrar o mesmo erro em várias situações da requisição, considerando que a requisição tenha mais de um then */
+                console.log('Erro capturado no then :>> ', error)
+                /* O return abaixo é para repassar o erro para que seja capturado no próximo then ou catch que existir */
+                return Promise.reject(error)
+            }).catch(error => {
+                /* Semelhante ao FAIL (ERROR) do jQuery */
+                /* Essa é a segunda forma de capturar o erro; normlamente, é utilizada uma única vez para capturar o error da requisição como um todo */
+                console.log('Error capturado no catch :>> ', error)
+
+                if (error.response) {           // significa que o servidor processou a requisição, mas retornou um Client Error (400-499)
+                    this.errorMessage = `Servidor retornou um erro: ${error.message} -- ${error.response.statusText}`
+                    console.log('Erro [response] :>> ', error.response);
+
+                } else if (error.request) {     // significa que o servidor não chegou a processar a requisição, Server Error (500-599)
+                    this.errorMessage = `Erro ao tentar se comunicar com o servidor: ${error.message}`
+                    console.log('Erro [request] :>> ', error.request);
+                } else {                        // significa que teve algum erro na codificação da requisição que não foi perceptível pelo Vue
+                    this.errorMessage = `Erro na montagem da requisição do axios: ${error.message}`
+                }
+
+                return 'Valor para o "optionalParams" do always (from catch)'
+            }).then(optionalParams => {
+                /* Semelhante ao ALWAYS (COMPLETE) do jQuery */
+                console.log('Sempre é executado e o parâmetro passado para esse callback pode existir ou não, dependendo se nos callbacks de sucesso e erro haverá alguma return :>> ', optionalParams);
             })
     },
     methods: {
