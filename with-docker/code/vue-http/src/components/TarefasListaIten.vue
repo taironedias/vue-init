@@ -2,8 +2,12 @@
     <li class="list-group-item d-flex">
         <span>{{ task.title }}</span>
         <span class="espacar"></span>
-        <button class="btn btn-sm mr-4" :class="cssClasses" :title="titleDoneButton">
-            <i class="fa fa-check"></i>
+        <button
+            class="btn btn-sm mr-4"
+            :class="cssClasses"
+            :title="titleDoneButton"
+            @click="doneTask">
+                <i class="fa fa-check"></i>
         </button>
         <button
             class="btn btn-primary btn-sm mr-1"
@@ -39,6 +43,12 @@ export default {
             return this.task.done
                 ? 'Refazer Tarefa'
                 : 'Concluir Tarefa'
+        }
+    },
+    methods: {
+        doneTask() {
+            /* Fazendo a emissão do evento dessa forma, para reaproveitar o método de requisição PUT no component pai (TarefasLista) */
+            this.$emit('doneTaskAction', Object.assign({}, this.task, { done: !this.task.done }))
         }
     }
 }

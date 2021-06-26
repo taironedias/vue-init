@@ -19,7 +19,8 @@
                 :key="task.id"
                 :task="task"
                 @updateAction="selectedTaskForUpdate"
-                @deleteAction="deleteTask"/>
+                @deleteAction="deleteTask"
+                @doneTaskAction="updateTask"/>
         </ul>
 
         <p v-else>Nenhuma tarefa criada</p>
