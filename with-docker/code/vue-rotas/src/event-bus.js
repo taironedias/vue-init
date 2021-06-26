@@ -27,6 +27,16 @@ export default new Vue({
 
             this.contacts.splice(index, 1, contact)
             return true
+        },
+        deleteContact(id) {
+            const index = this.contacts.findIndex(iten => iten.id === id);
+
+            if (index < 0) {
+                return false
+            }
+
+            this.contacts.splice(index, 1)
+            return true
         }
     }
 })

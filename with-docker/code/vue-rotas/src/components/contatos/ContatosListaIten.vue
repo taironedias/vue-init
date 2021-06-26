@@ -1,23 +1,25 @@
 <template>
     <li>
         <span>{{ contact.name }}</span>
+        <button
+            class="btn btn-danger btn-sm float-right font-weight-bold"
+            @click="deleteContact(contact.id)">
+                X
+        </button>
         <router-link
             :to="{
                 name: 'contato',
                 params: { id : contact.id }
             }"
-            class="btn btn-info btn-sm float-right">
+            class="btn btn-info btn-sm float-right mr-2">
                 Detalhes
         </router-link>
-        <!-- <button
-            class="btn btn-info btn-sm float-right"
-            @click="verDetalhes">
-                Detalhes
-        </button> -->
     </li>
 </template>
 
 <script>
+import EventBus from '@/event-bus'
+
 export default {
     props: {
         contact: {
@@ -26,12 +28,9 @@ export default {
         }
     },
     methods: {
-        verDetalhes() {
-            // this.$router.push(`/contatos/${this.contact.id}`)   // forma que adiciona na pilha de navegação
-            // this.$router.push({ path: `/contatos/${this.contact.id}`})   // variação da forma acima porém com outra sintaxe
-            // this.$router.push({ path: '/contatos', params: { id: this.contact.id } })   // utilizando o 'params' essa forma NÃO FUNCIONA pois a rota está nomeada, então a forma correta é o código abaixo
-            // this.$router.push({ name: 'contato', params: { id: this.contact.id } })   // utilizando o 'params' essa forma NÃO FUNCIONA pois a rota está nomeada, então a forma correta é o código abaixo
-            // this.$router.replace({ name: 'contato', params: { id: this.contact.id } })   // uma outra variação que substitui a rota na pilha de navegação
+        deleteContact(id) {
+            window.confirm(`Deseja realmente deletar o contato: ${this.contact.name}?`)
+            const r = EventBus.deleteContact(id)
         }
     }
 }
