@@ -37,6 +37,18 @@ export default new Vue({
 
             this.contacts.splice(index, 1)
             return true
+        },
+        createContact(contact) {
+            debugger
+            if (contact === undefined) {
+                return false
+            }
+
+            let maxId = Math.max.apply(Math, this.contacts.map(iten => iten.id))
+            contact.id = +maxId + 1
+
+            this.contacts.push(contact)
+            return true
         }
     }
 })

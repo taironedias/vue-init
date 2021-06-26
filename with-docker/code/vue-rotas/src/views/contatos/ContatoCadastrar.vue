@@ -1,10 +1,10 @@
 <template>
-    <div v-if="contact">
-        <h3 class="font-weight-light">Nome: {{ contact.name }}</h3>
-
+    <div>
         <form @submit.prevent="save">
             <ContatosForm
-                :contact="contact"/>
+                :contact="contact"
+                labelOperation="Cadastrar"
+            />
         </form>
         <div class="alert alert-danger mt-3" v-if="messageError">{{ messageError }}</div>
     </div>
@@ -18,36 +18,33 @@ export default {
     components: {
         ContatosForm
     },
-    props: ['id'],
     data() {
         return {
-            contact: undefined,
+            contact: {
+                id: undefined,
+                name: undefined,
+                email: undefined
+            },
             messageError: '',
             isSubmit: false
         }
     },
-    beforeRouteEnter(to, from, next) {
-        console.log('beforeRouteEnter')
-        next(vm => {
-            vm.contact = EventBus.searchContact(+to.params.id)
-        })
-    },
     beforeRouteLeave(to, from, next) {
         console.log('beforeRouteLeave')
         !this.isSubmit
-            ? next(window.confirm('Deseja realmente sair da edição de contatos?'))
+            ? next(window.confirm('Deseja realmente sair do cadastro de contatos?'))
             : next()
     },
     methods: {
         save() {
-            const r = EventBus.updateContact(this.contact)
-            this.isSubmit = true;
+            const r = EventBus.createContact(this.contact)
 
             if (!r) {
-                this.messageError = `Ocorreu um erro ao salvar o contato: ${this.contact.name}`
+                this.messageError = `Ocorreu um erro ao cadastrar o contato: ${this.contact.name}`
                 return
             }
 
+            this.isSubmit = true;
             this.$router.push('/contatos')
         }
     }

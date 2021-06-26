@@ -19,7 +19,12 @@
             />
         </ul>
         <p v-else>Nenhum contato cadastrado.</p>
-        <button class="btn btn-secondary mt-4 mb-4" @click="voltarPagina">Voltar</button>
+        <button class="btn btn-secondary mt-4 mb-4 mr-2" @click="voltarPagina">Voltar</button>
+        <router-link
+            :to="{ name: 'contactCreate' }"
+            class="btn btn-success mt-4 mb-4">
+                Cadastrar
+        </router-link>
     </div>
 </template>
 

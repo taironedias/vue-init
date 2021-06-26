@@ -12,6 +12,7 @@ const Contatos = () => import(/* webpackChunkName: "contatos" */ './views/contat
 const ContatosHome = () => import(/* webpackChunkName: "contatos" */ './views/contatos/ContatosHome.vue')
 const ContatoDetalhes = () => import(/* webpackChunkName: "contatos" */ './views/contatos/ContatoDetalhes.vue')
 const ContatoEditar = () => import(/* webpackChunkName: "contatos" */ './views/contatos/ContatoEditar.vue')
+const ContatoCadastrar = () => import(/* webpackChunkName: "contatos" */ './views/contatos/ContatoCadastrar.vue')
 const Home = () => import('./views/Home.vue')
 
 Vue.use(VueRouter)
@@ -96,6 +97,12 @@ const router = new VueRouter({
             // next(new Error(`Você não possue permissões suficientes para acessa esse recurso "${to.fullPath}"`))  // dispara um erro que pode ser recuperado pelo router.onError
           }
         }, // meu-dominio.com/contatos/1/editar
+        {
+          path: '/create',
+          meta:{ requiredAuth: true },
+          component: ContatoCadastrar,
+          name: 'contactCreate'
+        },
         {
           path: '',
           component: ContatosHome,
