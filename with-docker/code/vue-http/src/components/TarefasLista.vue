@@ -157,27 +157,45 @@ export default {
                     }
                 })
         },
-        deleteTask(task) {
+        async deleteTask(task) {
             const confirm = window.confirm(`Deseja excluir a tarefa "${task.title}"?`)
 
             if (!confirm) {
                 return
             }
 
-            axios.delete(`/tasks/${task.id}`)
-                .then(response => {
-                    const index = this.tasks.findIndex(t => t.id === response.data.id)
-                    this.tasks.splice(index, 1)
-                })
-                .catch(error => {
-                    if (error.response) {
-                        this.errorMessage = `Servidor retornou um erro: ${error.message} -- ${error.response.statusText}`
-                    } else if (error.request) {
-                        this.errorMessage = `Erro ao tentar se comunicar com o servidor: ${error.message}`
-                    } else {
-                        this.errorMessage = `Erro na montagem da requisição do axios: ${error.message}`
-                    }
-                })
+            // axios.delete(`/tasks/${task.id}`)
+            //     .then(response => {
+            //         const index = this.tasks.findIndex(t => t.id === response.data.id)
+            //         this.tasks.splice(index, 1)
+            //     })
+            //     .catch(error => {
+            //         if (error.response) {
+            //             this.errorMessage = `Servidor retornou um erro: ${error.message} -- ${error.response.statusText}`
+            //         } else if (error.request) {
+            //             this.errorMessage = `Erro ao tentar se comunicar com o servidor: ${error.message}`
+            //         } else {
+            //             this.errorMessage = `Erro na montagem da requisição do axios: ${error.message}`
+            //         }
+            //     })
+
+            /* Utilizando o async/await */
+            try {
+                const response = await axios.delete(`/tasks/${task.id}`)
+                // const response = await axios.delete(`/endpointNotFound/${task.id}`) // provocando o erro para entrar no catch
+                const index = this.tasks.findIndex(t => t.id === response.data.id)
+                this.tasks.splice(index, 1)
+            } catch (error) {
+                if (error.response) {
+                    console.log(`Servidor retornou um erro: ${error.message} -- ${error.response.statusText}`)
+                } else if (error.request) {
+                    console.log(`Erro ao tentar se comunicar com o servidor: ${error.message}`)
+                } else {
+                    console.log(`Erro na montagem da requisição do axios: ${error.message}`)
+                }
+            } finally {
+                console.log('Sempre é executado')
+            }
         },
         showFormCreateTask() {
             if (this.selectedTask) {

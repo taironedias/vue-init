@@ -23,7 +23,7 @@ export default {
   components: {
     TarefasLista
   },
-  created() {
+  async created() {
     /* Primeira forma utilizando o axios */
     // axios.all([
     //   axios.get(`${config.apiUrl}/tasks/1`),
@@ -37,18 +37,27 @@ export default {
     // }))
 
     /* Segunda forma utilizando o ES6 */
-    axios.all([
-      axios.get(`${config.apiUrl}/tasks/1`),
-      axios.get(`${config.apiUrl}/tasks/3`),
-      axios.get(`${config.apiUrl}/tasks/4`)
-    ]).then(response => {
-      console.log('Requisições simultâneas...')
-      /* realizando a desestruturação na atribuição (destructuring assignment) */
-      const [responseTask1, responseTask3, responseTask4] = response
-      console.log('Response da Task1 :>> ', responseTask1)
-      console.log('Response da Task3 :>> ', responseTask3)
-      console.log('Response da Task4 :>> ', responseTask4)
-    })
+    // axios.all([
+    //   axios.get(`${config.apiUrl}/tasks/1`),
+    //   axios.get(`${config.apiUrl}/tasks/3`),
+    //   axios.get(`${config.apiUrl}/tasks/4`)
+    // ]).then(response => {
+    //   console.log('Requisições simultâneas...')
+    //   /* realizando a desestruturação na atribuição (destructuring assignment) */
+    //   const [responseTask1, responseTask3, responseTask4] = response
+    //   console.log('Response da Task1 :>> ', responseTask1)
+    //   console.log('Response da Task3 :>> ', responseTask3)
+    //   console.log('Response da Task4 :>> ', responseTask4)
+    // })
+
+    /* Utilizando o async/await */
+    const responseTask1 = await axios.get(`${config.apiUrl}/tasks/1`)
+    const responseTask3 = await axios.get(`${config.apiUrl}/tasks/3`)
+    const responseTask4 = await axios.get(`${config.apiUrl}/tasks/4`)
+    console.log('Requisições simultâneas com async/await...')
+    console.log('Response da Task1 :>> ', responseTask1)
+    console.log('Response da Task3 :>> ', responseTask3)
+    console.log('Response da Task4 :>> ', responseTask4)
   }
 }
 </script>
