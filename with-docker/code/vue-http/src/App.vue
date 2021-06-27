@@ -9,6 +9,30 @@
 
     <div class="container">
       <TarefasLista />
+
+      <button
+        class="btn btn-primary mt-4 mb-2"
+        @click="downloadImg">
+          <i class="fa fa-download mr-2"></i>
+          <span>Baixar Imagem</span>
+      </button>
+
+      <div class="progress" v-if="progressDownload > 0">
+        <div
+          class="progress-bar"
+          role="progressbar"
+          :style="{ width: progressDownload + '%' }"
+          :aria-valuenow="progressDownload"
+          aria-valuemin="0"
+          aria-valuemax="100">
+            {{ progressDownload }}%
+        </div>
+      </div>
+
+      <div v-if="image" class="mt-2 mb-4">
+        <img :src="image" class="rounded" style="max-width: 100%">
+      </div>
+
     </div>
   </div>
 </template>
@@ -22,6 +46,12 @@ import TarefasLista from './components/TarefasLista.vue'
 export default {
   components: {
     TarefasLista
+  },
+  data() {
+    return {
+      progressDownload: 0,
+      image: undefined
+    }
   },
   async created() {
     /* Primeira forma utilizando o axios */
@@ -58,6 +88,28 @@ export default {
     console.log('Response da Task1 :>> ', responseTask1)
     console.log('Response da Task3 :>> ', responseTask3)
     console.log('Response da Task4 :>> ', responseTask4)
+  },
+  methods: {
+    downloadImg() {
+      axios.get(
+        'https://images.unsplash.com/photo-1574903813031-311917165463?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1921&q=80',
+        {
+          responseType: 'blob',
+          onDownloadProgress: (progressEvent) => {
+            console.log('Fazendo download...')
+            this.progressDownload = ((progressEvent.loaded / progressEvent.total) * 100).toFixed(0)
+          }
+        }
+      ).then(response => {
+        console.log('Download concluído :>> ', response)
+
+        const reader = new window.FileReader()
+        reader.readAsDataURL(response.data)
+        reader.onload = () => {
+          this.image = reader.result
+        }
+      })
+    }
   }
 }
 </script>
