@@ -35,4 +35,21 @@ instance.interceptors.request.use(config => {
     return Promise.reject(error)
 })
 
+instance.interceptors.response.use(response => {
+    console.log('Interceptando a resposta :>> ', response)
+    /* limitando a quantidade de dados do response.data */
+    if (Array.isArray(response.data)) {
+        response.data = response.data.slice(1, 3)
+    }
+
+    // async
+    /* De forma análoga ao interceptors.request funciona a intercepção assíncrona */
+
+    //  sync
+    return response
+}, error => {
+    console.log('Erro capturado no interceptors.response :>> ', error)
+    return Promise.reject(error)
+})
+
 export default instance
