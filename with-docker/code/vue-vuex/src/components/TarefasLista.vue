@@ -14,15 +14,27 @@
             </div>
         </div>
 
-        <ul class="list-group" v-if="$store.getters.sortTasks.length > 0">
+        <h3 class="font-weight-light mt-4">A Fazer ({{ $store.getters.todoTasks.length }})</h3>
+        <ul class="list-group" v-if="$store.getters.todoTasks.length > 0">
             <TarefasListaIten
-                v-for="task in $store.getters.sortTasks"
+                v-for="task in $store.getters.todoTasks"
                 :key="task.id"
                 :task="task"
                 @updateAction="selectedTaskForUpdate"/>
         </ul>
 
-        <p v-else>Nenhuma tarefa criada</p>
+        <p v-else>Nenhuma tarefa a fazer</p>
+
+        <h3 class="font-weight-light mt-4">Concluída ({{ $store.getters.totalDoneTasks }})</h3>
+        <ul class="list-group" v-if="$store.getters.totalDoneTasks > 0">
+            <TarefasListaIten
+                v-for="task in doneTasks"
+                :key="task.id"
+                :task="task"
+                @updateAction="selectedTaskForUpdate"/>
+        </ul>
+
+        <p v-else>Nenhuma tarefa foi concluída</p>
 
         <TarefaSalvar
             v-if="showForm"
@@ -49,7 +61,10 @@ export default {
         }
     },
     computed: {
-        ...mapState(['tasks'])
+        ...mapState(['tasks']),
+        doneTasks() {
+            return this.$store.getters.doneTasks
+        }
     },
     methods: {
         showFormCreateTask() {
