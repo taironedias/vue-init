@@ -6,12 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         contador: 0,
-        tasks: [
-            { id: 1, title: 'Aprender Vue.js', done: true },
-            { id: 2, title: 'Aprender Vue Router', done: true },
-            { id: 3, title: 'Aprender Vuex', done: false },
-            { id: 4, title: 'Aprender GraphQL', done: false },
-        ]
+        tasks: []
     },
     getters: {
         doneTasks: state => {
@@ -37,6 +32,15 @@ export default new Vuex.Store({
             return id => {
                 return state.tasks.find(t => t.id === id)
             }
+        }
+    },
+    mutations: {
+        listTasks: state => {
+            state.tasks = [
+                { id: 1, title: 'Aprender Vue.js', done: true },
+                { id: 2, title: 'Aprender Vue Router', done: true },
+                { id: 3, title: 'Aprender Vuex', done: false }
+            ]
         }
     }
 })

@@ -64,6 +64,9 @@ export default {
         ...mapState(['tasks']),
         ...mapGetters(['doneTasks', 'todoTasks', 'totalDoneTasks'])
     },
+    created() {
+        this.$store.commit('listTasks')
+    },
     methods: {
         showFormCreateTask() {
             if (this.selectedTask) {
