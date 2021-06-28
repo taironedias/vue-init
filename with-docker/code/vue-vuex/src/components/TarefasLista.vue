@@ -14,9 +14,9 @@
             </div>
         </div>
 
-        <ul class="list-group" v-if="tasks.length > 0">
+        <ul class="list-group" v-if="$store.getters.sortTasks.length > 0">
             <TarefasListaIten
-                v-for="task in tasks"
+                v-for="task in $store.getters.sortTasks"
                 :key="task.id"
                 :task="task"
                 @updateAction="selectedTaskForUpdate"/>
