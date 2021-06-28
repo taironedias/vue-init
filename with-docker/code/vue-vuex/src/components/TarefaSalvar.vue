@@ -54,6 +54,11 @@ export default {
                 : 'btn-secondary'
         }
     },
+    created() {
+        if (this.task) {
+            console.log('searchTaskById :>> ', this.$store.getters.searchTaskById(this.task.id))
+        }
+    },
     methods: {
         save() {
             const operation = !this.task ? 'create' : 'update'

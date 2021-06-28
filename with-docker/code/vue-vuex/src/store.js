@@ -31,6 +31,12 @@ export default new Vuex.Store({
 
                 return task1.done - task2.done
             })
+        },
+        searchTaskById: state => {
+            /* Nesse caso, esse getter será sempre executado mesmo que a state task não sofra nenhum alteração. Isso, pois estou definindo que esse getter será chamando como uma função passando um parâmetro para ela, que é a implementação abaixo */
+            return id => {
+                return state.tasks.find(t => t.id === id)
+            }
         }
     }
 })
