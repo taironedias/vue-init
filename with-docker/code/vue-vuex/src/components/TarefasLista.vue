@@ -65,14 +65,14 @@ export default {
         ...mapGetters(['doneTasks', 'todoTasks', 'totalDoneTasks'])
     },
     created() {
-        const payload = {
+        this.$store.commit({
+            type: 'listTasks',
             tasks: [
                 { id: 1, title: 'Aprender Vue.js', done: true },
                 { id: 2, title: 'Aprender Vue Router', done: true },
                 { id: 3, title: 'Aprender Vuex', done: false }
             ]
-        }
-        this.$store.commit('listTasks', payload)
+        })
     },
     methods: {
         showFormCreateTask() {
