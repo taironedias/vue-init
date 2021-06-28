@@ -14,10 +14,10 @@
             </div>
         </div>
 
-        <h3 class="font-weight-light mt-4">A Fazer ({{ $store.getters.todoTasks.length }})</h3>
-        <ul class="list-group" v-if="$store.getters.todoTasks.length > 0">
+        <h3 class="font-weight-light mt-4">A Fazer ({{ todoTasks.length }})</h3>
+        <ul class="list-group" v-if="todoTasks.length > 0">
             <TarefasListaIten
-                v-for="task in $store.getters.todoTasks"
+                v-for="task in todoTasks"
                 :key="task.id"
                 :task="task"
                 @updateAction="selectedTaskForUpdate"/>
@@ -25,8 +25,8 @@
 
         <p v-else>Nenhuma tarefa a fazer</p>
 
-        <h3 class="font-weight-light mt-4">Concluída ({{ $store.getters.totalDoneTasks }})</h3>
-        <ul class="list-group" v-if="$store.getters.totalDoneTasks > 0">
+        <h3 class="font-weight-light mt-4">Concluída ({{ totalDoneTasks }})</h3>
+        <ul class="list-group" v-if="totalDoneTasks > 0">
             <TarefasListaIten
                 v-for="task in doneTasks"
                 :key="task.id"
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 import TarefaSalvar from './TarefaSalvar.vue'
 import TarefasListaIten from './TarefasListaIten.vue'
@@ -62,9 +62,7 @@ export default {
     },
     computed: {
         ...mapState(['tasks']),
-        doneTasks() {
-            return this.$store.getters.doneTasks
-        }
+        ...mapGetters(['doneTasks', 'todoTasks', 'totalDoneTasks'])
     },
     methods: {
         showFormCreateTask() {
