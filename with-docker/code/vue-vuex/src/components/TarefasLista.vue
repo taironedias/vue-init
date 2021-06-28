@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import TarefaSalvar from './TarefaSalvar.vue'
 import TarefasListaIten from './TarefasListaIten.vue'
 
@@ -41,15 +43,13 @@ export default {
     },
     data() {
         return {
-            tasks: [
-                { id: 1, title: 'Aprender Vue.js', done: true },
-                { id: 2, title: 'Aprender Vue Router', done: true },
-                { id: 3, title: 'Aprender Vuex', done: false }
-            ],
             showForm: false,
             selectedTask: undefined,
             errorMessage: undefined
         }
+    },
+    computed: {
+        ...mapState(['tasks'])
     },
     methods: {
         showFormCreateTask() {
