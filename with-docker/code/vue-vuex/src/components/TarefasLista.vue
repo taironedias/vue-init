@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapMutations, mapState } from 'vuex'
 
 import TarefaSalvar from './TarefaSalvar.vue'
 import TarefasListaIten from './TarefasListaIten.vue'
@@ -65,8 +65,45 @@ export default {
         ...mapGetters(['doneTasks', 'todoTasks', 'totalDoneTasks'])
     },
     created() {
-        this.$store.commit({
-            type: 'listTasks',
+        // this.$store.commit({
+        //     type: 'listTasks',
+        //     tasks: [
+        //         { id: 1, title: 'Aprender Vue.js', done: true },
+        //         { id: 2, title: 'Aprender Vue Router', done: true },
+        //         { id: 3, title: 'Aprender Vuex', done: false }
+        //     ]
+        // })
+
+        /* Utilizando o mapMutations */
+        /* primeira forma */
+        // this.listTasks({
+        //     tasks: [
+        //         { id: 1, title: 'Aprender Vue.js', done: true },
+        //         { id: 2, title: 'Aprender Vue Router', done: true },
+        //         { id: 3, title: 'Aprender Vuex', done: false }
+        //     ]
+        // })
+
+        /* segunda forma, variação 1 */
+        // this.loadTasks({
+        //     tasks: [
+        //         { id: 1, title: 'Aprender Vue.js', done: true },
+        //         { id: 2, title: 'Aprender Vue Router', done: true },
+        //         { id: 3, title: 'Aprender Vuex', done: false }
+        //     ]
+        // })
+
+        /* segunda forma, variação 1 */
+        // this.loadTasks({
+        //     tasks: [
+        //         { id: 1, title: 'Aprender Vue.js', done: true },
+        //         { id: 2, title: 'Aprender Vue Router', done: true },
+        //         { id: 3, title: 'Aprender Vuex', done: false }
+        //     ]
+        // })
+
+        /* segunda forma, variação 2 */
+        this.listTasks({
             tasks: [
                 { id: 1, title: 'Aprender Vue.js', done: true },
                 { id: 2, title: 'Aprender Vue Router', done: true },
@@ -75,6 +112,15 @@ export default {
         })
     },
     methods: {
+        // ...mapMutations(['listTasks']),  // primeira forma
+        ...mapMutations({                   // segunda forma
+            // loadTasks: 'listTasks',                      // variação 1
+            listTasks: (commit, payload, options) => {      // variação 2
+                /* normalmente é utilizado para realizar algum processamento antes de commitar a mutation, por exemplo, converter um valor de string para number de um campo específico */
+                console.log('payload.tasks :>> ', payload.tasks)
+                commit('listTasks', payload, options)
+            }
+        }),// primeira forma
         showFormCreateTask() {
             if (this.selectedTask) {
                 this.selectedTask = undefined
