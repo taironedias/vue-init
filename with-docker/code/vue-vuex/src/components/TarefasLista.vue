@@ -65,51 +65,27 @@ export default {
         ...mapGetters(['doneTasks', 'todoTasks', 'totalDoneTasks'])
     },
     created() {
-        // this.$store.commit({
-        //     type: 'listTasks',
-        //     tasks: [
-        //         { id: 1, title: 'Aprender Vue.js', done: true },
-        //         { id: 2, title: 'Aprender Vue Router', done: true },
-        //         { id: 3, title: 'Aprender Vuex', done: false }
-        //     ]
-        // })
+        setTimeout(() => {
+            /* primeira forma */
+            // this.$store.dispatch('listTasks', {
+            //     tasks: [
+            //         { id: 1, title: 'Aprender Vue.js', done: true },
+            //         { id: 2, title: 'Aprender Vue Router', done: true },
+            //         { id: 3, title: 'Aprender Vuex', done: false }
+            //     ]
+            // })
 
-        /* Utilizando o mapMutations */
-        /* primeira forma */
-        // this.listTasks({
-        //     tasks: [
-        //         { id: 1, title: 'Aprender Vue.js', done: true },
-        //         { id: 2, title: 'Aprender Vue Router', done: true },
-        //         { id: 3, title: 'Aprender Vuex', done: false }
-        //     ]
-        // })
-
-        /* segunda forma, variação 1 */
-        // this.loadTasks({
-        //     tasks: [
-        //         { id: 1, title: 'Aprender Vue.js', done: true },
-        //         { id: 2, title: 'Aprender Vue Router', done: true },
-        //         { id: 3, title: 'Aprender Vuex', done: false }
-        //     ]
-        // })
-
-        /* segunda forma, variação 1 */
-        // this.loadTasks({
-        //     tasks: [
-        //         { id: 1, title: 'Aprender Vue.js', done: true },
-        //         { id: 2, title: 'Aprender Vue Router', done: true },
-        //         { id: 3, title: 'Aprender Vuex', done: false }
-        //     ]
-        // })
-
-        /* segunda forma, variação 2 */
-        this.listTasks({
-            tasks: [
-                { id: 1, title: 'Aprender Vue.js', done: true },
-                { id: 2, title: 'Aprender Vue Router', done: true },
-                { id: 3, title: 'Aprender Vuex', done: false }
-            ]
-        })
+            /* segunda forma */
+            this.$store.dispatch({
+                type: 'listTasks',
+                tasks: [
+                    { id: 1, title: 'Aprender Vue.js', done: true },
+                    { id: 2, title: 'Aprender Vue Router', done: true },
+                    { id: 3, title: 'Aprender Vuex', done: false },
+                    { id: 4, title: 'Aprender JavaScript', done: true }
+                ]
+            })
+        }, 2000);
     },
     methods: {
         // ...mapMutations(['listTasks']),  // primeira forma
