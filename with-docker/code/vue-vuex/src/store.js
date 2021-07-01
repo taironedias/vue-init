@@ -14,6 +14,8 @@ const tasksModule = {
         tasks: []
     },
     getters: {
+        /* o comentário abaixo é para evitar que o eslint não interrompa a compilação, porque uma variável foi definida porém não está sendo utilizada */
+        // eslint-disable-next-line no-unused-vars
         doneTasks: (state, getters, rootState) => {
             console.log('Getters: state, rootState :>> ', state, rootState);
             return state.tasks.filter(t => t.done)
