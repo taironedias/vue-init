@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations, mapState } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 import TarefaSalvar from './TarefaSalvar.vue'
 import TarefasListaIten from './TarefasListaIten.vue'
@@ -65,42 +65,21 @@ export default {
         ...mapGetters(['doneTasks', 'todoTasks', 'totalDoneTasks'])
     },
     created() {
-        // setTimeout(() => {
-            /* primeira forma */
-            // this.$store.dispatch('listTasks', {
-            //     tasks: [
-            //         { id: 1, title: 'Aprender Vue.js', done: true },
-            //         { id: 2, title: 'Aprender Vue Router', done: true },
-            //         { id: 3, title: 'Aprender Vuex', done: false }
-            //     ]
-            // })
-
-            /* segunda forma */
-            // this.$store.dispatch({
-            //     type: 'listTasks',
-            //     tasks: [
-            //         { id: 1, title: 'Aprender Vue.js', done: true },
-            //         { id: 2, title: 'Aprender Vue Router', done: true },
-            //         { id: 3, title: 'Aprender Vuex', done: false },
-            //         { id: 4, title: 'Aprender JavaScript', done: true }
-            //     ]
-            // })
-        // }, 2000);
-        this.$store.dispatch('listTasks')
+        // this.listTasks()         // primeira forma mapActions
+        // this.loadingTasks()      // segunda forma mapActions variação 1
+        this.listTasks()            // segunda forma mapActions variação 2
             .then(() => {
                 console.log('Todas as actions foram executadas')
             })
     },
     methods: {
-        // ...mapMutations(['listTasks']),  // primeira forma
-        ...mapMutations({                   // segunda forma
-            // loadTasks: 'listTasks',                      // variação 1
-            listTasks: (commit, payload, options) => {      // variação 2
-                /* normalmente é utilizado para realizar algum processamento antes de commitar a mutation, por exemplo, converter um valor de string para number de um campo específico */
-                console.log('payload.tasks :>> ', payload.tasks)
-                commit('listTasks', payload, options)
-            }
-        }),// primeira forma
+        // ...mapActions(['listTasks']),                            // primeira forma
+        ...mapActions({                                             // segunda forma
+            loadingTasks: 'listTasks',                              // variação 1
+            listTasks: (dispatch, payload, options) => {            // variação 2
+                return dispatch('listTasks', payload, options)
+            },
+        }),
         showFormCreateTask() {
             if (this.selectedTask) {
                 this.selectedTask = undefined
