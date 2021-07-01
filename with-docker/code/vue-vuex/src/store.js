@@ -40,17 +40,25 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        /**
-         * 1. a action executa sempre uma mutantions, ela nunca deve implementar e alterar um estado diretamente
-         * 2. action deve ser usando quando há requisições assíncronas, diferente da mutation que não devemos jamais chamá-las em requisições assíncronos
-         */
-        listTasks: ({ commit }, payload) => {
-            console.log('action chamada...')
-            setTimeout(() => {
-                console.log('action executada')
-                commit('listTasks', payload)
-            }, 2000);
-            /* o primeiro parâmetro é o nome da mutation que definir e o segundo é o payload */
+        searchAllTasks: () => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve([
+                        { id: 1, title: 'Aprender Vue.js', done: true },
+                        { id: 2, title: 'Aprender Vue Router', done: true },
+                        { id: 3, title: 'Aprender Vuex', done: false },
+                        { id: 4, title: 'Aprender JavaScript', done: true }
+                    ])
+                }, 2000);
+            })
+        },
+        listTasks: ({ commit, dispatch }) => {
+            console.log('Ation: listTasks executada')
+            return dispatch('searchAllTasks')
+                .then(tasks => {
+                    console.log('Mutation: listTasks executada')
+                    return commit('listTasks', { tasks })
+                })
         }
     }
 })
