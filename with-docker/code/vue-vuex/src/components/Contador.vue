@@ -23,13 +23,13 @@ export default {
     },
     // computed: mapState(['contador']),    // primeira forma
     computed: {
-        ...mapState({                    // segunda forma
-            contador: state => state.contador.contador,  // variação 1
+        ...mapState('contador', {                    // segunda forma
+            contador: state => state.contador,  // variação 1
             contadorMultiplicado(state) {       // variação 1.1
                 /* utilizando essa variação quando é necessário acessar algum estado de propriedade local da instância Vue do component */
-                return state.contador.contador * this.constLocal
+                return state.contador * this.constLocal
             },
-            contadorAlias: state => state.contador.contador           // variação 2
+            contadorAlias: state => state.contador           // variação 2
         })
         // outras computed properties do component
     },

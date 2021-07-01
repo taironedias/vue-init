@@ -61,8 +61,9 @@ export default {
         }
     },
     computed: {
-        ...mapState(['tasks']),
-        ...mapGetters(['doneTasks', 'todoTasks', 'totalDoneTasks'])
+        /* o primeiro parâmetro do métodos mapState, mapGetters e mapActions refere-se ao namespaced do módulo. Essa é a forma mais sutil e elegante de corrigir a chamada dos getters, actions, mutations quando o módulo tem um namespaced. */
+        ...mapState('tasks', ['tasks']),
+        ...mapGetters('tasks', ['doneTasks', 'todoTasks', 'totalDoneTasks'])
     },
     created() {
         setTimeout(async () => {
@@ -72,7 +73,7 @@ export default {
     },
     methods: {
         // ...mapActions(['listTasks']),                            // primeira forma
-        ...mapActions({                                             // segunda forma
+        ...mapActions('tasks', {                                             // segunda forma
             loadingTasks: 'listTasks',                              // variação 1
             listTasks: (dispatch, payload, options) => {            // variação 2
                 return dispatch('listTasks', payload, options)

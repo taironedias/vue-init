@@ -56,7 +56,8 @@ export default {
     },
     created() {
         if (this.task) {
-            console.log('searchTaskById :>> ', this.$store.getters.searchTaskById(this.task.id))
+            /* uma outra forma de corrigir a chamada do getters, por exemplo, quando o módulo tem uma namespaced é atribuíndo a sintaxe apresentada abaixo, onde: temos envolvendo o nome do getter um colchetes, aspas e o primeiro valor o nome do módulo registrado na instância Vue e uma barra */
+            console.log('searchTaskById :>> ', this.$store.getters['tasks/searchTaskById'](this.task.id))
         }
     },
     methods: {
