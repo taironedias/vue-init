@@ -43,10 +43,13 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
 
 import TarefaSalvar from './TarefaSalvar.vue'
 import TarefasListaIten from './TarefasListaIten.vue'
+
+/* uma forma elegante de atribuir o namespaced na chamada dos mapActions, mapGetters, mapMutations e mapState é utilizando o createNamespacedHelpers. Essa função evitar adicionarmos antes de cada chamada do map... o nome do módulo */
+const { mapActions, mapGetters, mapState } = createNamespacedHelpers('tasks')
 
 export default {
     components: {
@@ -61,9 +64,8 @@ export default {
         }
     },
     computed: {
-        /* o primeiro parâmetro do métodos mapState, mapGetters e mapActions refere-se ao namespaced do módulo. Essa é a forma mais sutil e elegante de corrigir a chamada dos getters, actions, mutations quando o módulo tem um namespaced. */
-        ...mapState('tasks', ['tasks']),
-        ...mapGetters('tasks', ['doneTasks', 'todoTasks', 'totalDoneTasks'])
+        ...mapState(['tasks']),
+        ...mapGetters(['doneTasks', 'todoTasks', 'totalDoneTasks'])
     },
     created() {
         setTimeout(async () => {
@@ -73,7 +75,7 @@ export default {
     },
     methods: {
         // ...mapActions(['listTasks']),                            // primeira forma
-        ...mapActions('tasks', {                                             // segunda forma
+        ...mapActions({                                             // segunda forma
             loadingTasks: 'listTasks',                              // variação 1
             listTasks: (dispatch, payload, options) => {            // variação 2
                 return dispatch('listTasks', payload, options)
