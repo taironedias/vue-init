@@ -65,12 +65,10 @@ export default {
         ...mapGetters(['doneTasks', 'todoTasks', 'totalDoneTasks'])
     },
     created() {
-        // this.listTasks()         // primeira forma mapActions
-        // this.loadingTasks()      // segunda forma mapActions variação 1
-        this.listTasks()            // segunda forma mapActions variação 2
-            .then(() => {
-                console.log('Todas as actions foram executadas')
-            })
+        setTimeout(async () => {
+            await this.listTasks()            // segunda forma mapActions variação 2
+            console.log('Todas as actions foram executadas')
+        }, 1000);
     },
     methods: {
         // ...mapActions(['listTasks']),                            // primeira forma

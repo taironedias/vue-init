@@ -52,13 +52,11 @@ export default new Vuex.Store({
                 }, 2000);
             })
         },
-        listTasks: ({ commit, dispatch }) => {
-            console.log('Ation: listTasks executada')
-            return dispatch('searchAllTasks')
-                .then(tasks => {
-                    console.log('Mutation: listTasks executada')
-                    return commit('listTasks', { tasks })
-                })
+        listTasks: async ({ commit, dispatch }) => {
+            console.log('Action: listTasks executada')
+            const tasks = await dispatch('searchAllTasks')
+            console.log('Mutation: listTasks executada')
+            return commit('listTasks', { tasks })
         }
     }
 })
