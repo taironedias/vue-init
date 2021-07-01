@@ -4,12 +4,17 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const contadorModule = {
+    namespaced: true,
     state: {
         contador: 0
+    },
+    getters: {
+        contadorAtual: state => state.contador
     }
 }
 
 const tasksModule = {
+    namespaced: true,
     state: {
         tasks: []
     },
@@ -70,7 +75,7 @@ const tasksModule = {
     }
 }
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
     state: {
         user: 'taironedias'
     },
@@ -79,3 +84,7 @@ export default new Vuex.Store({
         tasks: tasksModule
     }
 })
+
+console.log('store :>> ', store)
+
+export default store
