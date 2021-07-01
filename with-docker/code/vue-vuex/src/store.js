@@ -14,7 +14,8 @@ const tasksModule = {
         tasks: []
     },
     getters: {
-        doneTasks: state => {
+        doneTasks: (state, getters, rootState) => {
+            console.log('Getters: state, rootState :>> ', state, rootState);
             return state.tasks.filter(t => t.done)
         },
         todoTasks: state => state.tasks.filter(t => !t.done),
@@ -57,16 +58,20 @@ const tasksModule = {
                 }, 2000);
             })
         },
-        listTasks: async ({ commit, dispatch }) => {
+        listTasks: async ({ commit, dispatch, state, rootState }) => {
             console.log('Action: listTasks executada')
             const tasks = await dispatch('searchAllTasks')
             console.log('Mutation: listTasks executada')
+            console.log('Actions: state, rootState :>> ', state, rootState);
             return commit('listTasks', { tasks })
         }
     }
 }
 
 export default new Vuex.Store({
+    state: {
+        user: 'taironedias'
+    },
     modules: {
         contador: contadorModule,
         tasks: tasksModule
