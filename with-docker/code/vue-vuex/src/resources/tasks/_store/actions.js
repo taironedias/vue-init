@@ -1,3 +1,5 @@
+import * as types from './mutations-types'
+
 export default {
     searchAllTasks: () => {
         return new Promise((resolve) => {
@@ -13,7 +15,7 @@ export default {
     },
     listTasks: async ({ commit, dispatch }) => {
         const tasks = await dispatch('searchAllTasks')
-        commit('listTasks', { tasks })
+        commit(types.LIST_TASKS, { tasks })
 
         dispatch('singin', { user: 'Tairone Dias' }, { root: true })
     }
