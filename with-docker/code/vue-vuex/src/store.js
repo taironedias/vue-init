@@ -77,7 +77,14 @@ const tasksModule = {
             const tasks = await dispatch('searchAllTasks')
             console.log('Mutation: listTasks executada')
             console.log('Actions: state, rootState :>> ', state, rootState);
-            return commit('listTasks', { tasks })
+            commit('listTasks', { tasks })
+
+            // commit('singin', { user: 'Tairone Dias' })                   // não funcionará, pois o Vuex tentará acessar a mutation do próprio módulo
+            // commit('singin', { user: 'Tairone Dias' }, { root: true })   // passando a option root: true, informo que é para acessar a global
+            // dispatch('singin', { user: 'Tairone Dias' })                 // de forma análoga, tentará acessar a action do próprio módulo
+            dispatch('singin', { user: 'Tairone Dias' }, { root: true })    // essa é a forma correta, pois acessará a action global
+            // dispatch('singin', null, { root: true })                     // caso a action global não tenha payload, basta passar null para poder colocar o terceiro parâmetro
+
         }
     }
 }
@@ -88,6 +95,16 @@ const store = new Vuex.Store({
     },
     getters: {
         welcomeMessage: state => `Olá ${state.user}!`
+    },
+    mutations: {
+        singin: (state, payload) => {
+            state.user = payload.user
+        }
+    },
+    actions: {
+        singin: ({ commit }, payload) => {
+            commit('singin', payload)
+        }
     },
     modules: {
         contador: contadorModule,

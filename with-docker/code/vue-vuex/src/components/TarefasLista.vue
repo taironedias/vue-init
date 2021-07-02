@@ -74,10 +74,11 @@ export default {
     },
     created() {
         setTimeout(async () => {
+            console.log('Mensagem de Boas Vindas:', this.welcome)
             await this.listTasks()            // segunda forma mapActions variação 2
+            console.log('Mensagem de Boas Vindas:', this.welcome)
             console.log('Todas as actions foram executadas')
         }, 1000);
-        console.log('Mensagem de Boas Vindas:', this.welcome)
     },
     methods: {
         // ...mapActions(['listTasks']),                            // primeira forma
