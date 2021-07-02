@@ -1,22 +1,46 @@
+import TasksService from './../_services/TasksService'
 import * as types from './mutations-types'
 
-export default {
-    searchAllTasks: () => {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve([
-                    { id: 1, title: 'Aprender Vue.js', done: true },
-                    { id: 2, title: 'Aprender Vue Router', done: true },
-                    { id: 3, title: 'Aprender Vuex', done: false },
-                    { id: 4, title: 'Aprender JavaScript', done: true }
-                ])
-            }, 2000);
-        })
-    },
-    listTasks: async ({ commit, dispatch }) => {
-        const tasks = await dispatch('searchAllTasks')
-        commit(types.LIST_TASKS, { tasks })
+function identifierError(error) {
+    if (error.response) {
+        console.log(`Servidor retornou um erro: ${error.message} -- ${error.response.statusText}`)
+    } else if (error.request) {
+        console.log(`Erro ao tentar se comunicar com o servidor: ${error.message}`)
+    } else {
+        console.log(`Erro na montagem da requisição do axios: ${error.message}`)
+    }
+}
 
-        dispatch('singin', { user: 'Tairone Dias' }, { root: true })
+export default {
+    createTask: ({ commit }, payload) => {
+        return TasksService.postTask(payload.task)
+            .then(response => commit(types.CREATE_TASKS, { task: response.data }))
+            .catch(error => {
+                identifierError(error)
+            })
+    },
+    editTask: async ({ commit }, { task }) => {
+        try {
+            const response = await TasksService.putTask(task)
+            commit(types.EDIT_TASKS, { task: response.data })
+        } catch (error) {
+            identifierError(error)
+        }
+    },
+    deleteTask: async ({ commit }, { id }) => {
+        try {
+            await TasksService.deleteTask(id)
+            commit(types.DELETE_TASKS, id)
+        } catch (error) {
+            identifierError(error)
+        }
+    },
+    listTasks: async ({ commit }) => {
+        try {
+            const response = await TasksService.getTasks()
+            commit(types.LIST_TASKS, { tasks: response.data })
+        } catch (error) {
+            identifierError(error)
+        }
     }
 }
