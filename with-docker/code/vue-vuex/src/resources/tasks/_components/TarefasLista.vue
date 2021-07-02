@@ -43,6 +43,8 @@
         <TarefaSalvar
             v-if="showForm"
             @saveAction="saveTask"/>
+
+        <div class="alert alert-danger" v-if="error">{{ getSanitizeError }}</div>
     </div>
 </template>
 
@@ -63,17 +65,20 @@ export default {
     },
     data() {
         return {
-            showForm: false,
-            errorMessage: undefined
+            showForm: false
         }
     },
     computed: {
-        ...mapState(['selectedTask']),
+        ...mapState([
+            'selectedTask',
+            'error'
+        ]),
         ...mapGetters([
             'doneTasks',
             'todoTasks',
             'totalDoneTasks',
-            'welcome'
+            'welcome',
+            'getSanitizeError'
         ])
     },
     created() {

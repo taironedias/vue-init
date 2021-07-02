@@ -4,7 +4,8 @@ import actions from './actions'
 
 const state = {
     tasks: [],
-    selectedTask: undefined
+    selectedTask: undefined,
+    error: undefined
 }
 
 export default {
