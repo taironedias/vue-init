@@ -64,12 +64,11 @@ export default {
     data() {
         return {
             showForm: false,
-            selectedTask: undefined,
             errorMessage: undefined
         }
     },
     computed: {
-        ...mapState(['tasks']),
+        ...mapState(['selectedTask']),
         ...mapGetters([
             'doneTasks',
             'todoTasks',
@@ -85,7 +84,9 @@ export default {
         ...mapActions([
             'deleteTask',
             'listTasks',
-            'doneTask'
+            'doneTask',
+            'selectTask',
+            'resetSelectedTask'
         ]),
         confirmDeleteTask(task) {
             const confirm = window.confirm(`Deseja realmente apagar a tarefa "${task.title}"?`)
@@ -97,19 +98,19 @@ export default {
         },
         showFormCreateTask() {
             if (this.selectedTask) {
-                this.selectedTask = undefined
+                this.resetSelectedTask()
                 return
             }
 
             this.showForm = !this.showForm
         },
         selectedTaskForUpdate(task) {
-            this.selectedTask = task
+            this.selectTask({ selectedTask: task })
             this.showForm = true
         },
         reset() {
             this.showForm = false
-            this.selectedTask = undefined
+            this.resetSelectedTask()
         }
     }
 }

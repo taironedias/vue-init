@@ -49,5 +49,11 @@ export default {
 
         /* não precisa ter o async/await pois essa action está apenas chamando outra action que tem faz todo o procedimento de chamada na API e atualizando no estado do Vuex */
         dispatch('editTask', { task })
+    },
+    selectTask: ({ commit }, payload) => {
+        commit(types.SELECT_TASK, payload)
+    },
+    resetSelectedTask: ({ commit }) => {
+        commit(types.SELECT_TASK, { selectedTask: undefined })
     }
 }
