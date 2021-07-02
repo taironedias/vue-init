@@ -42,5 +42,12 @@ export default {
         } catch (error) {
             identifierError(error)
         }
+    },
+    doneTask: ({ dispatch }, payload) => {
+        const task = Object.assign({}, payload.task)
+        task.done = !task.done
+
+        /* não precisa ter o async/await pois essa action está apenas chamando outra action que tem faz todo o procedimento de chamada na API e atualizando no estado do Vuex */
+        dispatch('editTask', { task })
     }
 }

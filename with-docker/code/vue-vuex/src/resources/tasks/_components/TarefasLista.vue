@@ -20,7 +20,8 @@
                 v-for="task in todoTasks"
                 :key="task.id"
                 :task="task"
-                @updateAction="selectedTaskForUpdate"/>
+                @updateAction="selectedTaskForUpdate"
+                @doneAction="doneTask({ task: $event })"/>
         </ul>
 
         <p v-else>Nenhuma tarefa a fazer</p>
@@ -31,7 +32,8 @@
                 v-for="task in doneTasks"
                 :key="task.id"
                 :task="task"
-                @updateAction="selectedTaskForUpdate"/>
+                @updateAction="selectedTaskForUpdate"
+                @doneAction="doneTask({ task: $event })"/>
         </ul>
 
         <p v-else>Nenhuma tarefa foi concluída</p>
@@ -74,24 +76,14 @@ export default {
         ])
     },
     created() {
-        console.log('this.$store :>> ', this.$store);
         register(this.$store)
-
-        setTimeout(async () => {
-            console.log('Mensagem de Boas Vindas:', this.welcome)
-            await this.listTasks()            // segunda forma mapActions variação 2
-            console.log('Mensagem de Boas Vindas:', this.welcome)
-            console.log('Todas as actions foram executadas')
-        }, 1000);
+        this.listTasks()
     },
     methods: {
-        // ...mapActions(['listTasks']),                            // primeira forma
-        ...mapActions({                                             // segunda forma
-            loadingTasks: 'listTasks',                              // variação 1
-            listTasks: (dispatch, payload, options) => {            // variação 2
-                return dispatch('listTasks', payload, options)
-            },
-        }),
+        ...mapActions([
+            'listTasks',
+            'doneTask'
+        ]),
         showFormCreateTask() {
             if (this.selectedTask) {
                 this.selectedTask = undefined
