@@ -14,7 +14,7 @@ function identifierError(error) {
 export default {
     createTask: ({ commit }, payload) => {
         return TasksService.postTask(payload.task)
-            .then(response => commit(types.CREATE_TASKS, { task: response.data }))
+            .then(response => commit(types.CREATE_TASK, { task: response.data }))
             .catch(error => {
                 identifierError(error)
             })
@@ -22,7 +22,7 @@ export default {
     editTask: async ({ commit }, { task }) => {
         try {
             const response = await TasksService.putTask(task)
-            commit(types.EDIT_TASKS, { task: response.data })
+            commit(types.EDIT_TASK, { task: response.data })
         } catch (error) {
             identifierError(error)
         }
@@ -30,7 +30,7 @@ export default {
     deleteTask: async ({ commit }, { id }) => {
         try {
             await TasksService.deleteTask(id)
-            commit(types.DELETE_TASKS, id)
+            commit(types.DELETE_TASK, id)
         } catch (error) {
             identifierError(error)
         }
