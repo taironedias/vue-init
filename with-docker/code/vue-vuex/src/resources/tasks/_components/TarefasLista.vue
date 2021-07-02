@@ -21,7 +21,8 @@
                 :key="task.id"
                 :task="task"
                 @updateAction="selectedTaskForUpdate"
-                @doneAction="doneTask({ task: $event })"/>
+                @doneAction="doneTask({ task: $event })"
+                @deleteAction="confirmDeleteTask" />
         </ul>
 
         <p v-else>Nenhuma tarefa a fazer</p>
@@ -33,7 +34,8 @@
                 :key="task.id"
                 :task="task"
                 @updateAction="selectedTaskForUpdate"
-                @doneAction="doneTask({ task: $event })"/>
+                @doneAction="doneTask({ task: $event })"
+                @deleteAction="confirmDeleteTask" />
         </ul>
 
         <p v-else>Nenhuma tarefa foi concluída</p>
@@ -81,9 +83,18 @@ export default {
     },
     methods: {
         ...mapActions([
+            'deleteTask',
             'listTasks',
             'doneTask'
         ]),
+        confirmDeleteTask(task) {
+            const confirm = window.confirm(`Deseja realmente apagar a tarefa "${task.title}"?`)
+
+            if (!confirm)
+                return
+
+            this.deleteTask({ id: task.id })
+        },
         showFormCreateTask() {
             if (this.selectedTask) {
                 this.selectedTask = undefined
