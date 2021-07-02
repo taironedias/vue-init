@@ -42,7 +42,7 @@
 
         <TarefaSalvar
             v-if="showForm"
-            :task="selectedTask"/>
+            @saveAction="saveTask"/>
     </div>
 </template>
 
@@ -86,7 +86,9 @@ export default {
             'listTasks',
             'doneTask',
             'selectTask',
-            'resetSelectedTask'
+            'resetSelectedTask',
+            'createTask',
+            'editTask'
         ]),
         confirmDeleteTask(task) {
             const confirm = window.confirm(`Deseja realmente apagar a tarefa "${task.title}"?`)
@@ -95,6 +97,20 @@ export default {
                 return
 
             this.deleteTask({ id: task.id })
+        },
+        async saveTask(event) {
+            switch (event.operation) {
+                case 'create':
+                    await this.createTask({ task: event.task })
+                    break;
+                case 'update':
+                    await this.editTask({ task: event.task })
+                    break;
+                default:
+                    console.log('Invalid save operation')
+                    break;
+            }
+            this.reset()
         },
         showFormCreateTask() {
             if (this.selectedTask) {
