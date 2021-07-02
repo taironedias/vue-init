@@ -3,7 +3,7 @@ export default {
     todoTasks: state => state.tasks.filter(t => !t.done),
     totalDoneTasks: (state, getters) => getters.doneTasks.length,
     sortTasks: state => {
-        return state.tasks.sort((task1, task2) => {
+        return state.tasks.slice().sort((task1, task2) => {
             if (task1.done === task2.done) {
                 return task1.title < task2.title
                     ? -1
