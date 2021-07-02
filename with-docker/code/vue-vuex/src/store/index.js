@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import contador from '@/resources/contador/_store/index'
-import tasks from '@/resources/tasks/_store/index'
 
 Vue.use(Vuex)
 
@@ -27,8 +26,7 @@ const actions = {
 }
 
 const modules = {
-    contador,
-    tasks
+    contador
 }
 
 export default new Vuex.Store({

@@ -45,6 +45,7 @@
 <script>
 import { createNamespacedHelpers } from 'vuex'
 
+import register from './../_store/register'
 import TarefaSalvar from './TarefaSalvar.vue'
 import TarefasListaIten from './TarefasListaIten.vue'
 
@@ -73,6 +74,9 @@ export default {
         ])
     },
     created() {
+        console.log('this.$store :>> ', this.$store);
+        register(this.$store)
+
         setTimeout(async () => {
             console.log('Mensagem de Boas Vindas:', this.welcome)
             await this.listTasks()            // segunda forma mapActions variação 2
