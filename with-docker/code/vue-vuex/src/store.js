@@ -45,6 +45,13 @@ const tasksModule = {
             return id => {
                 return state.tasks.find(t => t.id === id)
             }
+        },
+        welcome: (state, getters, rootState, rootGetters) => {
+            // state.tasks              // tasks.tasks
+            // getters.todoTasks        // 'tasks/todoTasks'
+            console.log('State Global :>> ', rootState.user)
+            console.log('Getters Global :>> ', rootGetters.welcomeMessage)
+            return rootGetters.welcomeMessage
         }
     },
     mutations: {
@@ -78,6 +85,9 @@ const tasksModule = {
 const store = new Vuex.Store({
     state: {
         user: 'taironedias'
+    },
+    getters: {
+        welcomeMessage: state => `Olá ${state.user}!`
     },
     modules: {
         contador: contadorModule,
